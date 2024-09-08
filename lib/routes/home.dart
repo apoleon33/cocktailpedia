@@ -1,3 +1,4 @@
+import 'package:cocktailpedia/widgets/home/recommendation.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/home/categories.dart';
@@ -32,6 +33,7 @@ class _HomeState extends State<Home> {
             hintText: "Mojito, Gin...",
           ),
           const Categories(),
+          const Recommendation(),
         ],
       ),
     );

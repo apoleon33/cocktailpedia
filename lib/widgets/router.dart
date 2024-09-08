@@ -15,8 +15,10 @@ class _RouterState extends State<Router> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(),
       body: Routes.values.map((e) => e.destination).toList()[currentPageIndex],
       bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: (int index) {
           setState(() {
             currentPageIndex = index;

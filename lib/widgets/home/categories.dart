@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
 
 enum ExampleCategories {
+  spritz("https://cdn-icons-png.flaticon.com/512/5295/5295859.png", "Spritz"),
+  ginger("https://cdn-icons-png.flaticon.com/512/1087/1087445.png", "Mule"),
+  punch("https://cdn-icons-png.flaticon.com/512/707/707196.png", "Punch"),
   summer(
       "https://static.vecteezy.com/system/resources/previews/009/266/750/original/sun-icon-design-free-png.png",
       "Summer"),
-  ginger("https://cdn-icons-png.flaticon.com/512/1087/1087445.png", "Mule"),
-  spritz("https://cdn-icons-png.flaticon.com/512/5295/5295859.png", "Spritz"),
-  punch("https://cdn-icons-png.flaticon.com/512/707/707196.png", "Punch"),
   fruits("https://cdn-icons-png.flaticon.com/512/3194/3194591.png", "Fruits");
 
   final String label;

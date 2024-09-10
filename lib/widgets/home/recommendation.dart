@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Recommendation extends StatelessWidget {
@@ -84,37 +83,41 @@ class SingleRecommendation extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-      child: SizedBox(
-        height: 250,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12.0),
-                child: Image(
-                  image: image,
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(12.0),
+        child: SizedBox(
+          height: 250,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 200,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                  child: Image(
+                    image: image,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(
-                name,
-                textAlign: TextAlign.start,
-                style: textTheme.titleSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Text(
+                  name,
+                  textAlign: TextAlign.start,
+                  style: textTheme.titleSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
               ),
-            ),
-            Text(
-              "By $author",
-              style: textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              Text(
+                "By $author",
+                style: textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

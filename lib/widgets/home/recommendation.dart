@@ -1,7 +1,7 @@
 import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:flutter/material.dart';
 
-import '../../routes/cocktail.dart';
+import '../../routes/cocktail_page.dart';
 
 class Recommendation extends StatelessWidget {
   const Recommendation({super.key});

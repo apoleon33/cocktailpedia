@@ -1,4 +1,7 @@
+import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:flutter/material.dart';
+
+import '../../routes/cocktail.dart';
 
 class Recommendation extends StatelessWidget {
   const Recommendation({super.key});
@@ -28,10 +31,7 @@ class Recommendation extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               children: ExampleRecommendation.values
                   .map(
-                    (e) => SingleRecommendation(
-                        image: NetworkImage(e.url),
-                        name: e.name,
-                        author: e.author),
+                    (e) => SingleRecommendation(e.cocktail),
                   )
                   .toList(),
             ),
@@ -43,38 +43,50 @@ class Recommendation extends StatelessWidget {
 }
 
 enum ExampleRecommendation {
-  espresso(
+  espresso(Cocktail(
+    name: "Espresso Martini",
+    author: "Adil",
+    image: [
       "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/cocktail-espresso-Martini.jpg.webp",
-      "Espresso Martini",
-      "Adil"),
-  frenchMule(
-    "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/french-mule.png.webp",
-    "French Mule",
-    "Simon",
-  ),
-  kurrantTina(
-    "https://www.destinationcocktails.fr/wp-content/uploads/2018/04/Kurrant-tina.jpg.webp",
-    "Kurrant Tiña",
-    "Clara",
-  );
+    ],
+    ingredients: [],
+  )),
+  frenchMule(Cocktail(
+    name: "French Mule",
+    author: "Simon",
+    image: [
+      "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/french-mule.png.webp",
+    ],
+    ingredients: [],
+  )),
+  kurrantTina(Cocktail(
+    name: "Kurrant Tiña",
+    author: "Clara",
+    image: [
+      "https://www.destinationcocktails.fr/wp-content/uploads/2018/04/Kurrant-tina.jpg.webp"
+    ],
+    ingredients: [],
+  )),
+  mary(Cocktail(
+    name: "Mary Pickford",
+    author: "idk",
+    image: [
+      "https://www.destinationcocktails.fr/wp-content/uploads/2024/05/mary-pickford-cocktail-2.jpg.webp"
+    ],
+    ingredients: [],
+  ));
 
-  final String url;
-  final String name;
-  final String author;
+  final Cocktail cocktail;
 
-  const ExampleRecommendation(this.url, this.name, this.author);
+  const ExampleRecommendation(this.cocktail);
 }
 
 class SingleRecommendation extends StatelessWidget {
-  final ImageProvider image;
-  final String name;
-  final String author;
+  final Cocktail cocktail;
 
-  const SingleRecommendation({
+  const SingleRecommendation(
+    this.cocktail, {
     super.key,
-    required this.image,
-    required this.name,
-    required this.author,
   });
 
   @override
@@ -84,7 +96,11 @@ class SingleRecommendation extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => CocktailPage(cocktail)),
+          );
+        },
         borderRadius: BorderRadius.circular(12.0),
         child: SizedBox(
           height: 250,
@@ -95,15 +111,18 @@ class SingleRecommendation extends StatelessWidget {
                 height: 200,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
-                  child: Image(
-                    image: image,
+                  child: Hero(
+                    tag: cocktail,
+                    child: Image(
+                      image: NetworkImage(cocktail.image![0]),
+                    ),
                   ),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 4.0),
                 child: Text(
-                  name,
+                  cocktail.name,
                   textAlign: TextAlign.start,
                   style: textTheme.titleSmall?.copyWith(
                     color: Theme.of(context).colorScheme.onSurface,
@@ -111,7 +130,7 @@ class SingleRecommendation extends StatelessWidget {
                 ),
               ),
               Text(
-                "By $author",
+                "By ${cocktail.author}",
                 style: textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),

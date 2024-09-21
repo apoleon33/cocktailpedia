@@ -137,6 +137,34 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: _margin,
+                    child: Row(
+                      children: [
+                        ActionChip(
+                          onPressed: () {},
+                          label:
+                              Text("${widget.cocktail.glassType.name} Glass"),
+                          avatar: Image(
+                            image: widget.cocktail.glassType.getImage(),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: ActionChip(
+                            onPressed: () {},
+                            label: Text(
+                              "${widget.cocktail.shakerNeeded ? "S" : "No S"}haker needed",
+                            ),
+                            avatar: widget.cocktail.shakerNeeded
+                                ? const Image(
+                                    image: AssetImage("assets/shaker.png"))
+                                : null,
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ],

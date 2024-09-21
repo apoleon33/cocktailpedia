@@ -1,4 +1,5 @@
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/util/glass_type.dart';
 import 'package:flutter/material.dart';
 
 import '../../routes/cocktail_page.dart';
@@ -50,6 +51,8 @@ enum ExampleRecommendation {
       "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/cocktail-espresso-Martini.jpg.webp",
     ],
     ingredients: [],
+    glassType: GlassType(name: "Cocktail"),
+    shakerNeeded: true,
   )),
   frenchMule(Cocktail(
     name: "French Mule",
@@ -58,6 +61,7 @@ enum ExampleRecommendation {
       "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/french-mule.png.webp",
     ],
     ingredients: [],
+    glassType: GlassType(name: "Mug"),
   )),
   kurrantTina(Cocktail(
     name: "Kurrant Tiña",
@@ -66,6 +70,7 @@ enum ExampleRecommendation {
       "https://www.destinationcocktails.fr/wp-content/uploads/2018/04/Kurrant-tina.jpg.webp"
     ],
     ingredients: [],
+    glassType: GlassType(name: "Whisky"),
   )),
   mary(Cocktail(
     name: "Mary Pickford",
@@ -74,6 +79,8 @@ enum ExampleRecommendation {
       "https://www.destinationcocktails.fr/wp-content/uploads/2024/05/mary-pickford-cocktail-2.jpg.webp"
     ],
     ingredients: [],
+    glassType: GlassType(name: "Hurricane"),
+    shakerNeeded: true,
   ));
 
   final Cocktail cocktail;

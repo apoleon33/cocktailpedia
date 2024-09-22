@@ -8,6 +8,8 @@ class Cocktail {
 
   final String? author;
 
+  final String description;
+
   /// A link to an image of the cocktail.
   final List<String>? image;
   final List<Ingredient> ingredients;
@@ -23,6 +25,7 @@ class Cocktail {
     this.author,
     this.glassType = const AnyGlassType(),
     this.shakerNeeded = false,
+    this.description = "",
   });
 
   /// All the alcoholic ingredients in the cocktail.
@@ -35,6 +38,8 @@ class Cocktail {
   /// The sweetener in a cocktail is the ingredient used to add sweetness. It can be a simple syrup, sugar, honey, agave nectar, or even fruit juices.
   List<Ingredient> get sweetener =>
       ingredients.where((element) => !element.isAlcoholic).toList();
+
+  bool get hasDescription => description != "";
 
   @override
   String toString() {

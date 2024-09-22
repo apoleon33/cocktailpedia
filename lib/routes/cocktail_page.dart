@@ -41,6 +41,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   final _sheet = GlobalKey();
   final _controller = DraggableScrollableController();
 
+  /// Uniform padding for every of [SliverList.list]'s children.
   final EdgeInsets _margin = const EdgeInsets.only(right: 16.0, left: 16.0);
 
   @override
@@ -119,6 +120,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
               ),
               SliverList.list(
                 children: [
+                  // Title
                   Padding(
                     padding: _margin,
                     child: Row(
@@ -132,6 +134,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                       ],
                     ),
                   ),
+                  // Author
                   Padding(
                     padding: _margin,
                     child: Text(
@@ -141,6 +144,8 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                       ),
                     ),
                   ),
+
+                  // Glass Type and shaker
                   Padding(
                     padding: _margin,
                     child: Row(
@@ -168,7 +173,29 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                         )
                       ],
                     ),
-                  )
+                  ),
+
+                  // Description
+                  Padding(
+                    padding: _margin.copyWith(top: 8.0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Description",
+                              style: textTheme.titleMedium,
+                            ),
+                          ],
+                        ),
+                        Text(
+                          (widget.cocktail.hasDescription)? widget.cocktail.description: "No description available.",
+                          style: textTheme.bodyMedium,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ],

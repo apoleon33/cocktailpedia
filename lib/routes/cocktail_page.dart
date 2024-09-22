@@ -1,4 +1,5 @@
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/widgets/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 class CocktailPage extends StatelessWidget {
@@ -9,16 +10,19 @@ class CocktailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Hero(
-            tag: cocktail,
-            child: Image(
-              image: NetworkImage(cocktail.image![0]),
+      body: CustomTheme(
+        image: NetworkImage(cocktail.image![0]),
+        child: Stack(
+          children: [
+            Hero(
+              tag: cocktail,
+              child: Image(
+                image: NetworkImage(cocktail.image![0]),
+              ),
             ),
-          ),
-          CustomBottomSheet(cocktail),
-        ],
+            CustomBottomSheet(cocktail),
+          ],
+        ),
       ),
     );
   }
@@ -154,7 +158,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                           child: ActionChip(
                             onPressed: () {},
                             label: Text(
-                              "${widget.cocktail.shakerNeeded ? "S" : "No S"}haker needed",
+                              "${widget.cocktail.shakerNeeded ? "S" : "No s"}haker needed",
                             ),
                             avatar: widget.cocktail.shakerNeeded
                                 ? const Image(

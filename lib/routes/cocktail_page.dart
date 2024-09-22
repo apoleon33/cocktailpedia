@@ -20,6 +20,22 @@ class CocktailPage extends StatelessWidget {
                 image: NetworkImage(cocktail.image![0]),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 32.0, left: 8.0, right: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton.filledTonal(
+                    onPressed: () {Navigator.pop(context);},
+                    icon: const Icon(Icons.arrow_back),
+                  ),
+                  IconButton.filledTonal(
+                    onPressed: () {},
+                    icon: const Icon(Icons.bookmark_outline_outlined),
+                  ),
+                ],
+              ),
+            ),
             CustomBottomSheet(cocktail),
           ],
         ),
@@ -189,7 +205,9 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                           ],
                         ),
                         Text(
-                          (widget.cocktail.hasDescription)? widget.cocktail.description: "No description available.",
+                          (widget.cocktail.hasDescription)
+                              ? widget.cocktail.description
+                              : "No description available.",
                           style: textTheme.bodyMedium,
                           textAlign: TextAlign.start,
                         ),

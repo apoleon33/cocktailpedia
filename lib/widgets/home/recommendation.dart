@@ -3,6 +3,7 @@ import 'package:cocktailpedia/util/glass_type.dart';
 import 'package:flutter/material.dart';
 
 import '../../routes/cocktail_page.dart';
+import 'example_cocktail.dart';
 
 class Recommendation extends StatelessWidget {
   const Recommendation({super.key});
@@ -41,51 +42,6 @@ class Recommendation extends StatelessWidget {
       ),
     );
   }
-}
-
-enum ExampleRecommendation {
-  espresso(Cocktail(
-    name: "Espresso Martini",
-    author: "Adil",
-    image: [
-      "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/cocktail-espresso-Martini.jpg.webp",
-    ],
-    ingredients: [],
-    glassType: GlassType(name: "Cocktail"),
-    shakerNeeded: true,
-  )),
-  frenchMule(Cocktail(
-    name: "French Mule",
-    author: "Simon",
-    image: [
-      "https://www.destinationcocktails.fr/wp-content/uploads/2024/06/french-mule.png.webp",
-    ],
-    ingredients: [],
-    glassType: GlassType(name: "Mug"),
-  )),
-  kurrantTina(Cocktail(
-    name: "Kurrant Tiña",
-    author: "Clara",
-    image: [
-      "https://www.destinationcocktails.fr/wp-content/uploads/2018/04/Kurrant-tina.jpg.webp"
-    ],
-    ingredients: [],
-    glassType: GlassType(name: "Whisky"),
-  )),
-  mary(Cocktail(
-    name: "Mary Pickford",
-    author: "idk",
-    image: [
-      "https://www.destinationcocktails.fr/wp-content/uploads/2024/05/mary-pickford-cocktail-2.jpg.webp"
-    ],
-    ingredients: [],
-    glassType: GlassType(name: "Hurricane"),
-    shakerNeeded: true,
-  ));
-
-  final Cocktail cocktail;
-
-  const ExampleRecommendation(this.cocktail);
 }
 
 class SingleRecommendation extends StatelessWidget {

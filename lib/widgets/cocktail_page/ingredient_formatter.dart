@@ -20,7 +20,7 @@ class IngredientFormatter extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
                     image: DecorationImage(
-                        image: ingredient.ingredient.image, fit: BoxFit.fill),
+                        image: ingredient.ingredient.image, fit: BoxFit.cover),
                     boxShadow: kElevationToShadow[1],
                     borderRadius: BorderRadius.circular(6.0),
                   ),

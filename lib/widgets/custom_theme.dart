@@ -14,6 +14,8 @@ class _CustomTheme extends State<CustomTheme> {
   ColorScheme colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.deepOrange, brightness: Brightness.light);
 
+  final Brightness _brightness = Brightness.light;
+
   @override
   void initState() {
     super.initState();
@@ -24,7 +26,10 @@ class _CustomTheme extends State<CustomTheme> {
   }
 
   void _initTheme() async {
-    colorScheme = await ColorScheme.fromImageProvider(provider: widget.image);
+    colorScheme = await ColorScheme.fromImageProvider(
+      provider: widget.image,
+      brightness: _brightness,
+    );
     setState(() {});
   }
 
@@ -34,6 +39,7 @@ class _CustomTheme extends State<CustomTheme> {
         data: ThemeData(
           colorScheme: colorScheme,
           useMaterial3: true,
+          brightness: _brightness,
         ),
         child: widget.child);
   }

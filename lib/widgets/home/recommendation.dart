@@ -1,5 +1,4 @@
 import 'package:cocktailpedia/util/cocktail.dart';
-import 'package:cocktailpedia/util/glass_type.dart';
 import 'package:flutter/material.dart';
 
 import '../../routes/cocktail_page.dart';
@@ -56,6 +55,7 @@ class SingleRecommendation extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
+    precacheImage(NetworkImage(cocktail.image![0]), context);
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: InkWell(

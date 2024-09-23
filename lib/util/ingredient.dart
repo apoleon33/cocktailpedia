@@ -61,7 +61,7 @@ class CocktailIngredient {
     this.isBase = false,
   });
 
-  String get formatQuantity => "$quantity $unit";
+  String get formatQuantity => (quantity != 0.0) ? "$quantity $unit" : "";
 
   @override
   String toString() {
@@ -71,6 +71,7 @@ class CocktailIngredient {
 
 enum Unit {
   cl,
+  wedges,
   unit,
   oz;
 

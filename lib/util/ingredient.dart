@@ -8,8 +8,11 @@ class GenericIngredient {
 
   final ImageProvider? imageProvider;
 
-  const GenericIngredient(this.name,
-      {this.alcoholLevel = 0.0, this.imageProvider});
+  const GenericIngredient(
+    this.name, {
+    this.alcoholLevel = 0.0,
+    this.imageProvider,
+  });
 
   bool get isAlcoholic => alcoholLevel != 0.0;
 
@@ -17,12 +20,13 @@ class GenericIngredient {
     if (imageProvider != null) {
       return imageProvider!;
     } else {
-      // <a href="https://www.flaticon.com/fr/icones-gratuites/verre" title="verre icônes">Verre icônes créées par Freepik - Flaticon</a>
       return (isAlcoholic)
           ? const AssetImage("assets/default_ingredient.png")
           : const AssetImage("assets/default_drink.png");
     }
   }
+
+  String get formatName => name;
 }
 
 class BrandedIngredient extends GenericIngredient {
@@ -30,11 +34,16 @@ class BrandedIngredient extends GenericIngredient {
 
   final double price;
 
-  const BrandedIngredient(super.name,
-      {required this.brand,
-      this.price = 0.0,
-      super.alcoholLevel,
-      super.imageProvider});
+  const BrandedIngredient(
+    super.name, {
+    required this.brand,
+    this.price = 0.0,
+    super.alcoholLevel,
+    super.imageProvider,
+  });
+
+  @override
+  String get formatName => "$brand ($name)";
 }
 
 /// While the [GenericIngredient] class describe in a general manner, well, an ingredient, the [CocktailIngredient] class describe it as it's used in the cocktail.
@@ -66,5 +75,5 @@ enum Unit {
   oz;
 
   @override
-  String toString() => name;
+  String toString() => (name != "unit") ? name : "";
 }

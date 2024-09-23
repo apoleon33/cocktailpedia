@@ -28,7 +28,7 @@ class IngredientFormatter extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    ingredient.ingredient.name,
+                    ingredient.ingredient.formatName,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
@@ -37,7 +37,7 @@ class IngredientFormatter extends StatelessWidget {
             Text(
               ingredient.formatQuantity,
               style: Theme.of(context).textTheme.bodyMedium,
-            )
+            ),
           ],
         ),
       );

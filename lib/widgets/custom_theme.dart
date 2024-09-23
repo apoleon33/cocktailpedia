@@ -21,11 +21,11 @@ class _CustomTheme extends State<CustomTheme> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      _initTheme();
+      Future.delayed(const Duration(seconds: 1), _initTheme);
     });
   }
 
-  void _initTheme() async {
+  Future<void> _initTheme() async {
     colorScheme = await ColorScheme.fromImageProvider(
       provider: widget.image,
       brightness: _brightness,

@@ -67,11 +67,16 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   void initState() {
     super.initState();
     _controller.addListener(_onChanged);
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _goToHalf();
+    });
   }
 
   void _onChanged() {
     final currentSize = _controller.size;
     if (currentSize <= 0.05) _collapse();
+    if (currentSize <= 0.35) _goToHalf();
   }
 
   void _collapse() => _animateSheet(sheet.snapSizes!.first);
@@ -79,6 +84,9 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   void _expand() => _animateSheet(sheet.maxChildSize);
 
   void _hide() => _animateSheet(sheet.minChildSize);
+
+  void _goToHalf() => _controller.animateTo(0.5,
+      duration: const Duration(milliseconds: 200), curve: Curves.linear);
 
   void _animateSheet(double size) {
     _controller.animateTo(
@@ -103,9 +111,9 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
     return DraggableScrollableSheet(
       key: _sheet,
       controller: _controller,
-      initialChildSize: 0.5,
+      initialChildSize: 0.25,
       maxChildSize: 1,
-      minChildSize: 0.45,
+      minChildSize: 0.25,
       expand: true,
       snap: true,
       snapSizes: const [0.5],

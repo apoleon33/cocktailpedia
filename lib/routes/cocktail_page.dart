@@ -1,4 +1,5 @@
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/widgets/cocktail_page/ingredient_formatter.dart';
 import 'package:cocktailpedia/widgets/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,9 @@ class CocktailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton.filledTonal(
-                    onPressed: () {Navigator.pop(context);},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: const Icon(Icons.arrow_back),
                   ),
                   IconButton.filledTonal(
@@ -102,7 +105,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
       controller: _controller,
       initialChildSize: 0.5,
       maxChildSize: 1,
-      minChildSize: 0.5,
+      minChildSize: 0.45,
       expand: true,
       snap: true,
       snapSizes: const [0.5],
@@ -193,14 +196,14 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
 
                   // Description
                   Padding(
-                    padding: _margin.copyWith(top: 8.0),
+                    padding: _margin.copyWith(top: 16.0),
                     child: Column(
                       children: [
                         Row(
                           children: [
                             Text(
                               "Description",
-                              style: textTheme.titleMedium,
+                              style: textTheme.titleLarge,
                             ),
                           ],
                         ),
@@ -214,6 +217,38 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                       ],
                     ),
                   ),
+
+                  // Ingredients
+                  Padding(
+                    padding: _margin.copyWith(
+                      top: 16.0,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Ingredients",
+                              style: textTheme.titleLarge,
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Column(
+                            children: widget.cocktail.ingredients
+                                .map(
+                                  (e) => Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: IngredientFormatter(e),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ],

@@ -12,7 +12,7 @@ class Cocktail {
 
   /// A link to an image of the cocktail.
   final List<String>? image;
-  final List<Ingredient> ingredients;
+  final List<CocktailIngredient> ingredients;
 
   final GlassType glassType;
 
@@ -29,15 +29,19 @@ class Cocktail {
   });
 
   /// All the alcoholic ingredients in the cocktail.
-  List<Ingredient> get alcohols =>
-      ingredients.where((element) => element.isAlcoholic).toList();
+  List<GenericIngredient> get alcohols => ingredients
+      .where((element) => element.ingredient.isAlcoholic)
+      .map((e) => e.ingredient)
+      .toList();
 
   /// The base of a cocktail is the primary spirit or liquor that forms the foundation of the drink.
-  List<Ingredient> get bases => [];
+  List<GenericIngredient> get bases => [];
 
   /// The sweetener in a cocktail is the ingredient used to add sweetness. It can be a simple syrup, sugar, honey, agave nectar, or even fruit juices.
-  List<Ingredient> get sweetener =>
-      ingredients.where((element) => !element.isAlcoholic).toList();
+  List<GenericIngredient> get sweetener => ingredients
+      .where((element) => !element.ingredient.isAlcoholic)
+      .map((e) => e.ingredient)
+      .toList();
 
   bool get hasDescription => description != "";
 

@@ -10,6 +10,9 @@ class Cocktail {
 
   final String description;
 
+  /// The actual recipe, in Markdown format.
+  final String recipe;
+
   /// A link to an image of the cocktail.
   final List<String>? image;
   final List<CocktailIngredient> ingredients;
@@ -21,6 +24,7 @@ class Cocktail {
   const Cocktail({
     required this.name,
     required this.ingredients,
+    this.recipe = "",
     this.image,
     this.author,
     this.glassType = const AnyGlassType(),

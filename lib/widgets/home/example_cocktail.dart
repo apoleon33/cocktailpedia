@@ -22,7 +22,14 @@ enum ExampleRecommendation {
     ],
     ingredients: [
       CocktailIngredient(
-        ingredient: GenericIngredient("Vodka", alcoholLevel: 40.0),
+        ingredient: BrandedIngredient(
+          "Vodka",
+          brand: "Poliakov",
+          alcoholLevel: 40.0,
+          imageProvider: NetworkImage(
+            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.licorea.com%2Fimages%2Fmagictoolbox_cache%2Ffeabb61ae2a71c1844359f7cbe8b5d82%2F4%2F8%2F4882%2Foriginal%2F1410160036%2Fvodka_poliakov_1litro.jpg&f=1&nofb=1&ipt=5e30bc382676214f2e569c8c4d089a183192f0077f07a2bd4ee40aef2f9c7da9&ipo=images",
+          ),
+        ),
         quantity: 5,
       ),
       CocktailIngredient(
@@ -53,6 +60,24 @@ enum ExampleRecommendation {
     shakerNeeded: true,
     description:
         "The Espresso Martini cocktail is easy to make. It's made with vodka, coffee and cane syrup.",
+    recipe: """
+#### En amont
+- Préparez un expresso fort et laissez-le refroidir complètement.
+
+- Mettez à refroidir votre verre à cocktail.
+
+#### Mélangez les ingrédients
+- Dans un shaker, ajoutez la vodka Poliakov, le café expresso refroidi, la liqueur de café et le sirop de sucre Canadou.
+
+- Secouez vigoureusement pendant environ 10 à 15 secondes pour bien mélanger les ingrédients.
+
+#### Servez
+
+- Munissez-vous de votre verre refroidi.
+
+- Incorporez votre mélange en filtrant les glaçons à l’aide d’une passoire à cocktail.
+
+    """,
   )),
   // ----------------------------------
   frenchMule(Cocktail(
@@ -93,6 +118,25 @@ enum ExampleRecommendation {
     glassType: GlassType(name: "Mug"),
     description:
         "The French Mule is a variant of the Moscow Mule. The French Mule replaces the vodka with cognac or French vodka. This cocktail is perfect for those looking to explore new flavours while staying true to the Mule cocktail tradition.",
+    recipe: """
+#### Prenez et mélangez les ingrédients
+
+- Prenez une timbale en cuivre ou un verre highball et remplissez-le de glaçons.
+
+- Versez le cognac Courcel sur les glaçons.
+
+- Ajoutez le jus de citron vert frais.
+
+- Complétez avec la Ginger Beer
+
+#### Mélangez
+
+- Mélangez délicatement avec une cuillère à mélange tous les ingrédients pendant quelques secondes.
+
+#### Décorez
+
+- Garnissez d’une tranche de citron vert et d’un brin de menthe fraîche.
+    """,
   )),
   // ------------------------------------------------------------
   kurrantTina(Cocktail(
@@ -124,6 +168,22 @@ enum ExampleRecommendation {
     glassType: GlassType(name: "Whisky"),
     description:
         "Discover Kurrant Tiña, an original and delicious cocktail to enjoy whenever you like!",
+    recipe: """
+#### Préparez vos ingrédients
+
+- Dans un verre old fashioned, déposez 4 quartiers de citron vert frais.
+
+- Ajoutez 1 cl de sirop de pur canne Canadou.
+
+- Pilez le tout à l’aide d’un pilon, directement dans le verre.
+
+- Ajoutez ensuite 6 cl de jus de citron vert, 4 cl de cachaça Aguacana et 2 cl de crème de cassis L’Héritier-Guyot.
+
+- Remplissez le verre de glace pilée à votre convenance.
+
+- Servez sans attendre !
+
+    """,
   )),
   // --------------------------------------------------------------------
   mary(Cocktail(
@@ -166,6 +226,22 @@ enum ExampleRecommendation {
     shakerNeeded: true,
     description:
         "The Mary Pickford white rum cocktail is a fruity cocktail combining grenadine syrup, maraschino liqueur and pineapple juice.",
+    recipe: """
+#### Mélangez les ingrédients
+
+- Munissez-vous d’un shaker et déposez-y quelques glaçons.
+
+- Versez le rhum blanc, la liqueur de marasquin, le jus d’ananas et le sirop de grenadine.
+
+- Secouez énergiquement pendant une dizaine de secondes.
+
+#### Servez
+ 
+- Munissez-vous d’un verre à cocktail.
+
+- Incorporez votre mélange en filtrant les glaçons à l’aide d’une passoire à cocktail.
+
+    """,
   ));
 
   final Cocktail cocktail;

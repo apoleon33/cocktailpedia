@@ -1,16 +1,8 @@
-# cocktailpedia
+<p align="center">
+    <h1>🍸 cocktailpedia</h1>
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/apoleon33/cocktailpedia"> <img alt="GitHub License" src="https://img.shields.io/github/license/apoleon33/cocktailpedia"> <img alt="Line count" src="https://tokei.rs/b1/github/apoleon33/cocktailpedia?type=dart&label=dart lines of code">
+</p>
+
+
 
 The collaborative cocktail encyclopedia
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

@@ -1,5 +1,7 @@
+import 'converter.dart';
+
 class Api {
-    static void GetFromApi(ApiConverter object){};
+    static void getFromApi(ApiConverter object){}
 }
 
 class ApiContent{

@@ -40,8 +40,8 @@ class ApiContent {
 }
 
 /// Abstract interface to make the creation of any object with data coming from an api possible.
-abstract class ApiCreatable {
+abstract class ApiCreatable <T>{
   
   /// How the object should be created, with the information from the api being stored in [apiContent.content].
-  ApiCreatable getFromApi(ApiContent apiContent);
+  T getFromApi(ApiContent apiContent);
 }

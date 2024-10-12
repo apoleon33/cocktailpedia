@@ -46,6 +46,7 @@ jobs:
             build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
             build/ios_build.tar.gz
+            build/macos/Build/Products/Release/cocktailpedia.app
 #      - name: Extract version from pubspec.yaml
 #        id: extract_version
 #        run: |

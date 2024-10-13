@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    pull_request:
-      - master
 
 jobs:
   build:
@@ -26,12 +24,12 @@ jobs:
           channel: 'stable'
       - name: Install Dependencies
         run: flutter pub get
-      - name: Build APK
-        run: flutter build apk --release
-      - name: Build appBundle
-        run: flutter build appbundle
-      - name: Build IPA
-        run: flutter build ipa --no-codesign
+#      - name: Build APK
+#        run: flutter build apk --release
+#      - name: Build appBundle
+#        run: flutter build appbundle
+#      - name: Build IPA
+#        run: flutter build ipa --no-codesign
       - name: Build for MacOS
         run: flutter build macos --release
       - name: Compress Archives and IPAs
@@ -43,9 +41,9 @@ jobs:
         with:
           name: Releases
           path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
-            build/ios_build.tar.gz
+#            build/app/outputs/flutter-apk/app-release.apk
+#            build/app/outputs/bundle/release/app-release.aab
+#            build/ios_build.tar.gz
             build/macos/Build/Products/Release/cocktailpedia.app
 #      - name: Extract version from pubspec.yaml
 #        id: extract_version

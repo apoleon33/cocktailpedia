@@ -32,10 +32,10 @@ jobs:
 #        run: flutter build ipa --no-codesign
       - name: Build for MacOS
         run: flutter build macos --release
-      - name: Compress Archives and IPAs
-        run: |
-          cd build
-          tar -czf ios_build.tar.gz ios
+      # - name: Compress Archives and IPAs
+      #   run: |
+      #     cd build
+      #     tar -czf ios_build.tar.gz ios
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:

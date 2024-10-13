@@ -11,23 +11,16 @@ class Api {
 
   Api({this.endpoint = ""});
 
-  Future<Response> fetchApi() {
+  Future<Response> _fetchApi() {
     // baseUrl + endpoint
     return get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
   }
 
-  static Future<T> createFromApi<T extends ApiCreatable>(
-    T Function(ApiContent) builder,
-    String endpoint,
-  ) async {
-    final Api api = Api(endpoint: endpoint);
-    final response = await api.fetchApi();
-
-    return builder(
-      ApiContent(
-        content: jsonDecode(response.body) as Map<String, dynamic>,
-      ),
-    );
+  /// Get Api informations about an object
+  static Future<ApiContent> getFromApi(ApiConnectivity object) async {
+    final Api api = Api(endpoint: object.endpoint);
+    final response = await api._fetchApi();
+    return ApiContent(content: jsonDecode(response.body) as Map<String, dynamic>);
   }
 }
 
@@ -39,9 +32,8 @@ class ApiContent {
   ApiContent({required this.content});
 }
 
-/// Abstract interface to make the creation of any object with data coming from an api possible.
-abstract class ApiCreatable <T>{
-  
-  /// How the object should be created, with the information from the api being stored in [apiContent.content].
-  T getFromApi(ApiContent apiContent);
+/// Everything an object need, to be
+abstract class ApiConnectivity {
+  /// This is the endpoint added to the base of the Api url, depending on which data we wants.
+  String get endpoint;
 }

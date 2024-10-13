@@ -1,8 +1,9 @@
+import 'package:cocktailpedia/database/api.dart';
 import 'package:cocktailpedia/util/glass_type.dart';
 
 import 'ingredient.dart';
 
-class Cocktail {
+class Cocktail implements ApiConnectivity{
   /// The name of the cocktail.
   final String name;
 
@@ -32,6 +33,12 @@ class Cocktail {
     this.description = "",
   });
 
+  /// Build A [Cocktail] object from the Api
+  factory Cocktail.getFromApi(ApiContent apiContent) => Cocktail(
+        name: apiContent.content["name"],
+        ingredients: apiContent.content["ingredient"],
+      );
+
   /// All the alcoholic ingredients in the cocktail.
   List<GenericIngredient> get alcohols => ingredients
       .where((element) => element.ingredient.isAlcoholic)
@@ -53,4 +60,7 @@ class Cocktail {
   String toString() {
     return 'Cocktail{name: $name, author: $author, ingredients: $ingredients, glassType: $glassType}';
   }
+
+  @override
+  String get endpoint => "";
 }

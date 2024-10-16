@@ -1,26 +1,29 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
+
 
 class Api {
   /// The base url of the api
   final String baseUrl = "https://example.com/";
+
+  final Dio dio = Dio();
 
   /// The additional endpoint of the api. Default to [""]
   final String endpoint;
 
   Api({this.endpoint = ""});
 
-  Future<Response> _fetchApi() {
+  Future<Response> _fetchApi() async{
     // baseUrl + endpoint
-    return get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+    return dio.get('https://jsonplaceholder.typicode.com/albums/1');
   }
 
   /// Get Api informations about an object
   static Future<ApiContent> getFromApi(ApiConnectivity object) async {
     final Api api = Api(endpoint: object.endpoint);
     final response = await api._fetchApi();
-    return ApiContent(content: jsonDecode(response.body) as Map<String, dynamic>);
+    return ApiContent(content: jsonDecode(response.data) as Map<String, dynamic>);
   }
 }
 

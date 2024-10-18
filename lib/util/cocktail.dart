@@ -3,7 +3,7 @@ import 'package:cocktailpedia/util/glass_type.dart';
 
 import 'ingredient.dart';
 
-class Cocktail implements ApiConnectivity{
+class Cocktail {
   /// The name of the cocktail.
   final String name;
 
@@ -22,6 +22,8 @@ class Cocktail implements ApiConnectivity{
 
   final bool shakerNeeded;
 
+  static const apiEndpoint = "cocktail";
+
   const Cocktail({
     required this.name,
     required this.ingredients,
@@ -35,8 +37,10 @@ class Cocktail implements ApiConnectivity{
 
   /// Build A [Cocktail] object from the Api
   factory Cocktail.getFromApi(ApiContent apiContent) => Cocktail(
-        name: apiContent.content["name"],
-        ingredients: apiContent.content["ingredient"],
+        name: apiContent.asMap["name"],
+        author: apiContent.asMap["author"],
+        ingredients: [],
+        shakerNeeded: apiContent.asMap["mixing"] == "YES",
       );
 
   /// All the alcoholic ingredients in the cocktail.
@@ -60,7 +64,4 @@ class Cocktail implements ApiConnectivity{
   String toString() {
     return 'Cocktail{name: $name, author: $author, ingredients: $ingredients, glassType: $glassType}';
   }
-
-  @override
-  String get endpoint => "";
 }

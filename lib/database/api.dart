@@ -2,41 +2,44 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-
 class Api {
   /// The base url of the api
-  final String baseUrl = "https://example.com/";
+  final String baseUrl = "http://172.252.236.195:8080/";
+  final Map<String, dynamic> queryParameters;
 
   final Dio dio = Dio();
 
   /// The additional endpoint of the api. Default to [""]
   final String endpoint;
 
-  Api({this.endpoint = ""});
+  Api({this.endpoint = "", this.queryParameters = const {}});
 
-  Future<Response> _fetchApi() async{
+  Future<Response> _fetchApi() async {
     // baseUrl + endpoint
-    return dio.get('https://jsonplaceholder.typicode.com/albums/1');
+    return dio.get(
+      baseUrl + endpoint,
+    );
   }
 
   /// Get Api informations about an object
-  static Future<ApiContent> getFromApi(ApiConnectivity object) async {
-    final Api api = Api(endpoint: object.endpoint);
+  static Future<ApiContent> getFromApi(
+    String endpoint,
+    Map<String, dynamic> queryParameters,
+  ) async {
+    final Api api = Api(endpoint: endpoint, queryParameters: queryParameters);
     final response = await api._fetchApi();
-    return ApiContent(content: jsonDecode(response.data) as Map<String, dynamic>);
+    return ApiContent(response.data);
   }
 }
 
-/// Class to store data from the api
+/// Class to store data from the api.
 /// Pretty useless for the moment.
 class ApiContent {
-  final Map<String, dynamic> content;
+  final dynamic rawData;
 
-  ApiContent({required this.content});
-}
+  ApiContent(this.rawData);
 
-/// Everything an object need, to be
-abstract class ApiConnectivity {
-  /// This is the endpoint added to the base of the Api url, depending on which data we wants.
-  String get endpoint;
+  dynamic get jsonDecoded => jsonDecode(rawData);
+
+  Map<String, dynamic> get asMap => jsonDecoded as Map<String, dynamic>;
 }

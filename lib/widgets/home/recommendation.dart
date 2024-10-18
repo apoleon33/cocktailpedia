@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
-import 'example_cocktail.dart';
 
 class Recommendation extends StatefulWidget {
   const Recommendation({super.key});
@@ -96,40 +95,43 @@ class SingleRecommendationState extends State<SingleRecommendation> {
           );
         },
         borderRadius: BorderRadius.circular(12.0),
-        child: SizedBox(
-          height: 250,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 200,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: Hero(
-                    tag: cocktail,
-                    child: Image(
-                      image: NetworkImage(cocktail.image![0]),
+        child: AspectRatio(
+          aspectRatio: 165 / 250,
+          child: SizedBox(
+            height: 250,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 200,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: Hero(
+                      tag: cocktail,
+                      child: Image(
+                        image: NetworkImage(cocktail.image![0]),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Text(
-                  cocktail.name,
-                  textAlign: TextAlign.start,
-                  style: textTheme.titleSmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Text(
+                    cocktail.name,
+                    textAlign: TextAlign.start,
+                    style: textTheme.titleSmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                "By ${cocktail.author}",
-                style: textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                Text(
+                  "By ${cocktail.author}",
+                  style: textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -141,46 +143,49 @@ class SingleRecommendationState extends State<SingleRecommendation> {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: ShimmerLoading(
-        child: SizedBox(
-          height: 252,
-          width: 150,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: 200,
-                width: 150,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Container(
-                  height: 18,
+        child: AspectRatio(
+          aspectRatio: 165 / 250,
+          child: SizedBox(
+            height: 252,
+            //width: 170,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 200,
                   width: 150,
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Container(
-                  height: 12,
-                  width: 75,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Container(
+                    height: 18,
+                    //width: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4.0),
+                  child: Container(
+                    height: 12,
+                    //width: 75,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

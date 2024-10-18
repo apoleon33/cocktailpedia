@@ -10,6 +10,11 @@ class GlassType {
 
   ImageProvider getImage() =>
       AssetImage("assets/glass-type/${name.toLowerCase()}.png");
+
+  @override
+  String toString() {
+    return 'GlassType{name: $name, description: $description}';
+  }
 }
 
 class AnyGlassType extends GlassType {

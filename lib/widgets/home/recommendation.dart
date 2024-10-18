@@ -76,14 +76,13 @@ class SingleRecommendationState extends State<SingleRecommendation> {
         {'id': widget.cocktailId},
       ),
     );
-    print("found cocktail in api!");
     setState(() {});
   }
 
   /// Not directly in the [build] method to avoid null checks and for more readability.
   Widget _displayCocktail(BuildContext context, Cocktail cocktail) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    print(cocktail);
+
     precacheImage(NetworkImage(cocktail.image![0]), context);
 
     return Padding(

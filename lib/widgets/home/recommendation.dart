@@ -1,12 +1,19 @@
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 
+import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
 import 'example_cocktail.dart';
 
-class Recommendation extends StatelessWidget {
+class Recommendation extends StatefulWidget {
   const Recommendation({super.key});
 
+  @override
+  State<StatefulWidget> createState() => _RecommendationState();
+}
+
+class _RecommendationState extends State<Recommendation> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,11 +37,10 @@ class Recommendation extends StatelessWidget {
             height: 250,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: ExampleRecommendation.values
-                  .map(
-                    (e) => SingleRecommendation(e.cocktail),
-                  )
-                  .toList(),
+              children: const [
+                SingleRecommendation(cocktailId: 0),
+                SingleRecommendation(cocktailId: 1)
+              ],
             ),
           )
         ],
@@ -43,19 +49,44 @@ class Recommendation extends StatelessWidget {
   }
 }
 
-class SingleRecommendation extends StatelessWidget {
-  final Cocktail cocktail;
+/// How a single cocktail is displayed in the "Recommendation" tab of the home.
+class SingleRecommendation extends StatefulWidget {
+  final int cocktailId;
 
-  const SingleRecommendation(
-    this.cocktail, {
-    super.key,
-  });
+  const SingleRecommendation({super.key, required this.cocktailId});
 
   @override
-  Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
+  State<StatefulWidget> createState() => SingleRecommendationState();
+}
 
+class SingleRecommendationState extends State<SingleRecommendation> {
+  Cocktail? cocktail;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      _getCocktailFromApi();
+    });
+  }
+
+  void _getCocktailFromApi() async {
+    cocktail = Cocktail.getFromApi(
+      await Api.getFromApi(
+        Cocktail.apiEndpoint,
+        {'id': widget.cocktailId},
+      ),
+    );
+    print("found cocktail in api!");
+    setState(() {});
+  }
+
+  /// Not directly in the [build] method to avoid null checks and for more readability.
+  Widget _displayCocktail(BuildContext context, Cocktail cocktail) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    print(cocktail);
     precacheImage(NetworkImage(cocktail.image![0]), context);
+
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: InkWell(
@@ -103,5 +134,65 @@ class SingleRecommendation extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  /// Bascially [_displayCocktail], but with black squares instead of the image, name and author
+  Widget _displayShimmer(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+      child: ShimmerLoading(
+        child: SizedBox(
+          height: 252,
+          width: 150,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 200,
+                width: 150,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Container(
+                  height: 18,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Container(
+                  height: 12,
+                  width: 75,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (cocktail != null) {
+      return _displayCocktail(context, cocktail!);
+    } else {
+      return _displayShimmer(context);
+    }
   }
 }

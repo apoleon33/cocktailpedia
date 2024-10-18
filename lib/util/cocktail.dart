@@ -1,5 +1,6 @@
 import 'package:cocktailpedia/database/api.dart';
 import 'package:cocktailpedia/util/glass_type.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'ingredient.dart';
 
@@ -40,6 +41,10 @@ class Cocktail {
         name: apiContent.asMap["name"],
         author: apiContent.asMap["author"],
         ingredients: [],
+        image: apiContent.asMap["image"] ??
+            [
+              "https://s2.qwant.com/thumbr/474x474/f/d/aef8498b551e1d0734f6c2df514e2df07f8d87407b7c81c75baf6cffa00a1d/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.5cSAMaIjiO_2Gg7H05iKQgHaHa%26pid%3DApi&q=0&b=1&p=0&a=0"
+            ],
         shakerNeeded: apiContent.asMap["mixing"] == "YES",
       );
 

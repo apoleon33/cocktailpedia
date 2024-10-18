@@ -18,6 +18,7 @@ class Api {
     // baseUrl + endpoint
     return dio.get(
       baseUrl + endpoint,
+      queryParameters: queryParameters,
     );
   }
 
@@ -39,7 +40,7 @@ class ApiContent {
 
   ApiContent(this.rawData);
 
-  dynamic get jsonDecoded => jsonDecode(rawData);
+  bool isThisType<T>() => rawData.runtimeType == T;
 
-  Map<String, dynamic> get asMap => jsonDecoded as Map<String, dynamic>;
+  Map<String, dynamic> get asMap => isThisType<Map<String, dynamic>>()? rawData: rawData[0];
 }

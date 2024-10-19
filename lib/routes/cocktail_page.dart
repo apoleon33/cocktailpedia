@@ -13,13 +13,13 @@ class CocktailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomTheme(
-        image: NetworkImage(cocktail.image![0]),
+        image: cocktail.image[0].image,
         child: Stack(
           children: [
             Hero(
               tag: cocktail,
               child: Image(
-                image: NetworkImage(cocktail.image![0]),
+                image: cocktail.image[0].image,
               ),
             ),
             Padding(

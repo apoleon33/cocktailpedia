@@ -83,7 +83,7 @@ class SingleRecommendationState extends State<SingleRecommendation> {
   Widget _displayCocktail(BuildContext context, Cocktail cocktail) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    precacheImage(NetworkImage(cocktail.image![0]), context);
+    precacheImage(cocktail.image[0].image, context);
 
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
@@ -108,7 +108,7 @@ class SingleRecommendationState extends State<SingleRecommendation> {
                     child: Hero(
                       tag: cocktail,
                       child: Image(
-                        image: NetworkImage(cocktail.image![0]),
+                        image: cocktail.image[0].image,
                       ),
                     ),
                   ),

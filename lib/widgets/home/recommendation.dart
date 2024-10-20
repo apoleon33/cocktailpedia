@@ -2,6 +2,7 @@ import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:cocktailpedia/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
 
+
 import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
 
@@ -141,50 +142,54 @@ class SingleRecommendationState extends State<SingleRecommendation> {
   Widget _displayShimmer(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-      child: ShimmerLoading(
-        child: AspectRatio(
-          aspectRatio: 165 / 250,
-          child: SizedBox(
-            height: 252,
-            //width: 170,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
+      child: AspectRatio(
+        aspectRatio: 165 / 250,
+        child: SizedBox(
+          height: 252,
+          //width: 170,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomShimmer(
+                child: Container(
                   height: 200,
                   width: 150,
                   decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: Colors.grey[300],
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: CustomShimmer(
                   child: Container(
                     height: 18,
                     //width: 150,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: CustomShimmer(
                   child: Container(
                     height: 12,
                     //width: 75,
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Colors.grey[300],
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

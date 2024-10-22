@@ -1,7 +1,7 @@
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/util/display_loading.dart';
 import 'package:cocktailpedia/widgets/shimmer.dart';
 import 'package:flutter/material.dart';
-
 
 import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
@@ -59,7 +59,8 @@ class SingleRecommendation extends StatefulWidget {
   State<StatefulWidget> createState() => SingleRecommendationState();
 }
 
-class SingleRecommendationState extends State<SingleRecommendation> {
+class SingleRecommendationState extends State<SingleRecommendation>
+    implements DisplayLoading {
   Cocktail? cocktail;
 
   @override
@@ -81,7 +82,11 @@ class SingleRecommendationState extends State<SingleRecommendation> {
   }
 
   /// Not directly in the [build] method to avoid null checks and for more readability.
-  Widget _displayCocktail(BuildContext context, Cocktail cocktail) {
+  @override
+  Widget buildLoadingEnded(BuildContext context, [Cocktail? cocktailArg]) {
+    assert(cocktailArg != null);
+    final Cocktail cocktail = cocktailArg!; // even with the "!" it should be fine
+
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     precacheImage(cocktail.image[0].image, context);
@@ -138,8 +143,9 @@ class SingleRecommendationState extends State<SingleRecommendation> {
     );
   }
 
-  /// Bascially [_displayCocktail], but with black squares instead of the image, name and author
-  Widget _displayShimmer(BuildContext context) {
+  /// Basically [_displayCocktail], but with black squares instead of the image, name and author
+  @override
+  Widget buildLoading(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: AspectRatio(
@@ -199,9 +205,9 @@ class SingleRecommendationState extends State<SingleRecommendation> {
   @override
   Widget build(BuildContext context) {
     if (cocktail != null) {
-      return _displayCocktail(context, cocktail!);
+      return buildLoadingEnded(context, cocktail!);
     } else {
-      return _displayShimmer(context);
+      return buildLoading(context);
     }
   }
 }

@@ -41,4 +41,9 @@ class ApiContent {
   bool isThisType<T>() => rawData.runtimeType == T;
 
   Map<String, dynamic> get asMap => isThisType<Map<String, dynamic>>()? rawData: rawData[0];
+
+  @override
+  String toString() {
+    return 'ApiContent{rawData: $rawData}';
+  }
 }

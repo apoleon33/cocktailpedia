@@ -12,7 +12,9 @@ class CustomTheme extends StatefulWidget {
 
 class _CustomTheme extends State<CustomTheme> {
   ColorScheme colorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.deepOrange, brightness: Brightness.light);
+    seedColor: Colors.deepOrange,
+    brightness: Brightness.light,
+  );
 
   final Brightness _brightness = Brightness.light;
 
@@ -21,6 +23,7 @@ class _CustomTheme extends State<CustomTheme> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // Future to avoid lage between the Hero transition and the theme switch
       Future.delayed(const Duration(seconds: 1), _initTheme);
     });
   }
@@ -36,11 +39,12 @@ class _CustomTheme extends State<CustomTheme> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-        data: ThemeData(
-          colorScheme: colorScheme,
-          useMaterial3: true,
-          brightness: _brightness,
-        ),
-        child: widget.child);
+      data: ThemeData(
+        colorScheme: colorScheme,
+        useMaterial3: true,
+        brightness: _brightness,
+      ),
+      child: widget.child,
+    );
   }
 }

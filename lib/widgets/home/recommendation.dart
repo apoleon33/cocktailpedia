@@ -85,7 +85,9 @@ class SingleRecommendationState extends State<SingleRecommendation>
   @override
   Widget buildLoadingEnded(BuildContext context, [Cocktail? cocktailArg]) {
     assert(cocktailArg != null);
-    final Cocktail cocktail = cocktailArg!; // even with the "!" it should be fine
+
+    // even with the "!" it should be fine
+    final Cocktail cocktail = cocktailArg!;
 
     final TextTheme textTheme = Theme.of(context).textTheme;
 

@@ -4,24 +4,64 @@ import 'package:cocktailpedia/widgets/custom_theme.dart';
 import 'package:flutter/material.dart';
 
 //import 'package:markdown_widget/markdown_widget.dart';
-
-class CocktailPage extends StatelessWidget {
+class CocktailPage extends StatefulWidget {
   final Cocktail cocktail;
 
-  const CocktailPage(this.cocktail, {super.key});
+  const CocktailPage({super.key, required this.cocktail});
+
+  @override
+  State<StatefulWidget> createState() => _CocktailPageState();
+}
+
+class _CocktailPageState extends State<CocktailPage> {
+  final ScrollController _imageScrollController = ScrollController();
+  bool isScrollingImage = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _imageScrollController.addListener(() {
+      isScrollingImage = !isScrollingImage;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _imageScrollController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomTheme(
-        image: cocktail.image[0].image,
+        image: widget.cocktail.image[0].image,
         child: Stack(
           children: [
-            Hero(
-              tag: cocktail,
-              child: Image(
-                image: cocktail.image[0].image,
-              ),
+            Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 2 / 3,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    controller: _imageScrollController,
+                    children: widget.cocktail.image
+                        .map((e) => Hero(
+                              tag: e.image,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: e.image,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                )
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(top: 32.0, left: 8.0, right: 8.0),
@@ -41,7 +81,7 @@ class CocktailPage extends StatelessWidget {
                 ],
               ),
             ),
-            CustomBottomSheet(cocktail),
+            CustomBottomSheet(widget.cocktail),
           ],
         ),
       ),
@@ -78,7 +118,7 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   void _onChanged() {
     final currentSize = _controller.size;
     if (currentSize <= 0.05) _collapse();
-    if (currentSize <= 0.35) _goToHalf();
+    //if (currentSize <= 0.35) _goToHalf();
   }
 
   void _collapse() => _animateSheet(sheet.snapSizes!.first);
@@ -113,9 +153,9 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
     return DraggableScrollableSheet(
       key: _sheet,
       controller: _controller,
-      initialChildSize: 0.25,
+      initialChildSize: 0.4,
       maxChildSize: 1,
-      minChildSize: 0.25,
+      minChildSize: 0.4,
       expand: true,
       snap: true,
       snapSizes: const [0.5],

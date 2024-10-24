@@ -104,7 +104,7 @@ class SingleRecommendationState extends State<SingleRecommendation>
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => CocktailPage(cocktail)),
+            MaterialPageRoute(builder: (context) => CocktailPage(cocktail: cocktail)),
           );
         },
         borderRadius: BorderRadius.circular(12.0),
@@ -120,7 +120,7 @@ class SingleRecommendationState extends State<SingleRecommendation>
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
                     child: Hero(
-                      tag: cocktail,
+                      tag: cocktail.image[0].image,
                       child: Image(
                         image: cocktail.image[0].image,
                       ),

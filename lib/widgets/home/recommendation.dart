@@ -1,3 +1,4 @@
+import 'package:cocktailpedia/database/cocktails_db.dart';
 import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:cocktailpedia/util/display_loading.dart';
 import 'package:cocktailpedia/widgets/shimmer.dart';
@@ -5,6 +6,9 @@ import 'package:flutter/material.dart';
 
 import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
+
+// Wether you should use the intern database, or data from the api
+const bool USE_DATA_FROM_DB = false;
 
 class Recommendation extends StatefulWidget {
   const Recommendation({super.key});
@@ -72,12 +76,14 @@ class SingleRecommendationState extends State<SingleRecommendation>
   }
 
   void _getCocktailFromApi() async {
-    cocktail = Cocktail.getFromApi(
-      await Api.getFromApi(
-        Cocktail.apiEndpoint,
-        {'id': widget.cocktailId},
-      ),
-    );
+    cocktail = (USE_DATA_FROM_DB)
+        ? Cocktail.getFromApi(
+            await Api.getFromApi(
+              Cocktail.apiEndpoint,
+              {'id': widget.cocktailId},
+            ),
+          )
+        : CocktailDatabase.values[widget.cocktailId];
     setState(() {});
   }
 

@@ -38,7 +38,7 @@ class CocktailDatabase {
                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.licorea.com%2Fimages%2Fmagictoolbox_cache%2Ffeabb61ae2a71c1844359f7cbe8b5d82%2F4%2F8%2F4882%2Foriginal%2F1410160036%2Fvodka_poliakov_1litro.jpg&f=1&nofb=1&ipt=5e30bc382676214f2e569c8c4d089a183192f0077f07a2bd4ee40aef2f9c7da9&ipo=images",
               ),
             ),
-            quantity: Quantity(5, Unit.cl),
+            quantity: Quantity(50, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: const BrandedIngredient(
@@ -48,11 +48,11 @@ class CocktailDatabase {
               imageProvider: NetworkImage(
                   "https://upload.wikimedia.org/wikipedia/commons/a/ac/Kahlua_Bottles_at_Liquor_Store.PNG"),
             ),
-            quantity: Quantity(3.0, Unit.cl),
+            quantity: Quantity(30.0, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: cane,
-            quantity: Quantity(1.0, Unit.cl),
+            quantity: Quantity(10.0, Unit.cl),
           ),
           CocktailIngredient(
               ingredient: const GenericIngredient(
@@ -60,7 +60,7 @@ class CocktailDatabase {
                 imageProvider: NetworkImage(
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReDxZ0M0aJ-kUKqFGtc6a6fGi5fGp-Nn0T8w&s"),
               ),
-              quantity: Quantity(1, Unit.unit)),
+              quantity: Quantity(10, Unit.unit)),
         ],
         glassType: const GlassType(name: "Cocktail"),
         shakerNeeded: true,
@@ -102,18 +102,18 @@ class CocktailDatabase {
                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.auchan.fr%2FA0219970925000084904PRIMARY_1200x1200%2FB2CD%2F&f=1&nofb=1&ipt=6388f9fdbe4eab3f951a119297d9f8fca8b25f74ced51e47611523988408e74d&ipo=images"),
             ),
             quantity: Quantity(
-              4.0,
+              40.0,
               Unit.cl,
             ),
           ),
           CocktailIngredient(
             ingredient:
                 const GenericIngredient("Ginger Beer", alcoholLevel: 1.0),
-            quantity: Quantity(12.0, Unit.cl),
+            quantity: Quantity(120.0, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: lime,
-            quantity: Quantity(2.0, Unit.cl),
+            quantity: Quantity(20.0, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: greenLime,
@@ -168,11 +168,11 @@ class CocktailDatabase {
                 "https://www.xo-vin.fr/4204-thickbox_default/000195013-saint-james-rhum-agricole-blanc-imperial-40_.jpg",
               ),
             ),
-            quantity: Quantity(4.5, Unit.cl),
+            quantity: Quantity(45.0, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: const GenericIngredient("Pineapple juice"),
-            quantity: Quantity(4.5, Unit.cl),
+            quantity: Quantity(45, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: const GenericIngredient(
@@ -182,11 +182,11 @@ class CocktailDatabase {
                 "https://premiumliqueur.com/1173-large_default/liqueur-de-marasquin-vedrenne-25-70cl.jpg",
               ),
             ),
-            quantity: Quantity(0.7, Unit.cl),
+            quantity: Quantity(7, Unit.cl),
           ),
           CocktailIngredient(
             ingredient: const GenericIngredient("Grenadine syrup"),
-            quantity: Quantity(0.5, Unit.cl),
+            quantity: Quantity(5, Unit.cl),
           ),
         ],
         glassType: const GlassType(name: "Hurricane"),
@@ -227,17 +227,17 @@ class CocktailDatabase {
                 "https://m.media-amazon.com/images/I/51fExBHBIhL.jpg",
               ),
             ),
-            quantity: Quantity(4.0, Unit.cl),
+            quantity: Quantity(40, Unit.cl),
           ),
           CocktailIngredient(
             ingredient:
                 const GenericIngredient("blackcurrant liqueur", alcoholLevel: 15.0),
-            quantity: Quantity(2.0, Unit.cl),
+            quantity: Quantity(20, Unit.cl),
           ),
           CocktailIngredient(
-              ingredient: lime, quantity: Quantity(6.0, Unit.cl)),
+              ingredient: lime, quantity: Quantity(60, Unit.cl)),
           CocktailIngredient(
-              ingredient: cane, quantity: Quantity(1.0, Unit.cl)),
+              ingredient: cane, quantity: Quantity(10, Unit.cl)),
           CocktailIngredient(
               ingredient: greenLime, quantity: Quantity(4, Unit.wedge)),
         ],

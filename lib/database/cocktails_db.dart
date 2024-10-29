@@ -1,5 +1,6 @@
 import 'package:cocktailpedia/util/base_64_image.dart';
 import 'package:cocktailpedia/util/ingredient.dart';
+import 'package:cocktailpedia/util/unit.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../util/cocktail.dart';
@@ -26,11 +27,10 @@ class CocktailDatabase {
           espressoString.decodeBase64Image(),
           Image.network(
               "https://s2.qwant.com/thumbr/474x632/4/7/0962dd505e789ad5fe160f335aedbc85ecf3255c02285064a1a77b59bd6f80/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.FvOT0gO2Xa2tvwv9ubwFwAHaJ4%26pid%3DApi&q=0&b=1&p=0&a=0"),
-
         ],
         ingredients: [
-          const CocktailIngredient(
-            ingredient: BrandedIngredient(
+          CocktailIngredient(
+            ingredient: const BrandedIngredient(
               "Vodka",
               brand: "Poliakov",
               alcoholLevel: 40.0,
@@ -38,31 +38,29 @@ class CocktailDatabase {
                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.licorea.com%2Fimages%2Fmagictoolbox_cache%2Ffeabb61ae2a71c1844359f7cbe8b5d82%2F4%2F8%2F4882%2Foriginal%2F1410160036%2Fvodka_poliakov_1litro.jpg&f=1&nofb=1&ipt=5e30bc382676214f2e569c8c4d089a183192f0077f07a2bd4ee40aef2f9c7da9&ipo=images",
               ),
             ),
-            quantity: 5,
+            quantity: Quantity(5, Unit.cl),
           ),
-          const CocktailIngredient(
-            ingredient: BrandedIngredient(
+          CocktailIngredient(
+            ingredient: const BrandedIngredient(
               "Coffee Liqueur",
               brand: "Kahlúa",
               alcoholLevel: 35.0,
               imageProvider: NetworkImage(
                   "https://upload.wikimedia.org/wikipedia/commons/a/ac/Kahlua_Bottles_at_Liquor_Store.PNG"),
             ),
-            quantity: 3.0,
+            quantity: Quantity(3.0, Unit.cl),
           ),
-          const CocktailIngredient(
+          CocktailIngredient(
             ingredient: cane,
-            quantity: 1,
+            quantity: Quantity(1.0, Unit.cl),
           ),
-          const CocktailIngredient(
-            ingredient: GenericIngredient(
-              "Espresso",
-              imageProvider: NetworkImage(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReDxZ0M0aJ-kUKqFGtc6a6fGi5fGp-Nn0T8w&s"),
-            ),
-            quantity: 1,
-            unit: Unit.unit,
-          ),
+          CocktailIngredient(
+              ingredient: const GenericIngredient(
+                "Espresso",
+                imageProvider: NetworkImage(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReDxZ0M0aJ-kUKqFGtc6a6fGi5fGp-Nn0T8w&s"),
+              ),
+              quantity: Quantity(1, Unit.unit)),
         ],
         glassType: const GlassType(name: "Cocktail"),
         shakerNeeded: true,
@@ -96,32 +94,38 @@ class CocktailDatabase {
               .decodeBase64Image(),
         ],
         ingredients: [
-          const CocktailIngredient(
-            ingredient: BrandedIngredient(
+          CocktailIngredient(
+            ingredient: const BrandedIngredient(
               "Cognac",
               brand: "Courcel",
               imageProvider: NetworkImage(
                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.auchan.fr%2FA0219970925000084904PRIMARY_1200x1200%2FB2CD%2F&f=1&nofb=1&ipt=6388f9fdbe4eab3f951a119297d9f8fca8b25f74ced51e47611523988408e74d&ipo=images"),
             ),
-            quantity: 4.0,
+            quantity: Quantity(
+              4.0,
+              Unit.cl,
+            ),
           ),
-          const CocktailIngredient(
-            ingredient: GenericIngredient("Ginger Beer", alcoholLevel: 1.0),
-            quantity: 12.0,
+          CocktailIngredient(
+            ingredient:
+                const GenericIngredient("Ginger Beer", alcoholLevel: 1.0),
+            quantity: Quantity(12.0, Unit.cl),
           ),
-          const CocktailIngredient(
+          CocktailIngredient(
             ingredient: lime,
-            quantity: 2,
+            quantity: Quantity(2.0, Unit.cl),
           ),
-          const CocktailIngredient(
+          CocktailIngredient(
             ingredient: greenLime,
+            quantity: Quantity(0.0, Unit.cl),
           ),
-          const CocktailIngredient(
-            ingredient: GenericIngredient(
+          CocktailIngredient(
+            ingredient: const GenericIngredient(
               "Fresh Mint",
               imageProvider: NetworkImage(
                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fagentfresh.com.au%2Fwp-content%2Fuploads%2F2021%2F01%2FMint-1024x866.jpg&f=1&nofb=1&ipt=581112c4accdc80ef4b3f969be554ab5973383634fb39936bdc2de502c7072f4&ipo=images"),
             ),
+            quantity: Quantity(0.0, Unit.cl),
           ),
         ],
         glassType: const GlassType(name: "Mug"),
@@ -156,33 +160,33 @@ class CocktailDatabase {
               .decodeBase64Image(),
         ],
         ingredients: [
-          const CocktailIngredient(
-            ingredient: GenericIngredient(
+          CocktailIngredient(
+            ingredient: const GenericIngredient(
               "White rum",
               alcoholLevel: 40.0,
               imageProvider: NetworkImage(
                 "https://www.xo-vin.fr/4204-thickbox_default/000195013-saint-james-rhum-agricole-blanc-imperial-40_.jpg",
               ),
             ),
-            quantity: 4.5,
+            quantity: Quantity(4.5, Unit.cl),
           ),
-          const CocktailIngredient(
-            ingredient: GenericIngredient("Pineapple juice"),
-            quantity: 4.5,
+          CocktailIngredient(
+            ingredient: const GenericIngredient("Pineapple juice"),
+            quantity: Quantity(4.5, Unit.cl),
           ),
-          const CocktailIngredient(
-            ingredient: GenericIngredient(
+          CocktailIngredient(
+            ingredient: const GenericIngredient(
               "Marasquin",
               alcoholLevel: 25.0,
               imageProvider: NetworkImage(
                 "https://premiumliqueur.com/1173-large_default/liqueur-de-marasquin-vedrenne-25-70cl.jpg",
               ),
             ),
-            quantity: 0.7,
+            quantity: Quantity(0.7, Unit.cl),
           ),
-          const CocktailIngredient(
-            ingredient: GenericIngredient("Grenadine syrup"),
-            quantity: 0.5,
+          CocktailIngredient(
+            ingredient: const GenericIngredient("Grenadine syrup"),
+            quantity: Quantity(0.5, Unit.cl),
           ),
         ],
         glassType: const GlassType(name: "Hurricane"),
@@ -215,25 +219,27 @@ class CocktailDatabase {
               .decodeBase64Image()
         ],
         ingredients: [
-          const CocktailIngredient(
-            ingredient: GenericIngredient(
+          CocktailIngredient(
+            ingredient: const GenericIngredient(
               "Cachaça",
               alcoholLevel: 42.0,
               imageProvider: NetworkImage(
                 "https://m.media-amazon.com/images/I/51fExBHBIhL.jpg",
               ),
             ),
-            quantity: 4.0,
+            quantity: Quantity(4.0, Unit.cl),
           ),
-          const CocktailIngredient(
+          CocktailIngredient(
             ingredient:
-                GenericIngredient("blackcurrant liqueur", alcoholLevel: 15.0),
-            quantity: 2.0,
+                const GenericIngredient("blackcurrant liqueur", alcoholLevel: 15.0),
+            quantity: Quantity(2.0, Unit.cl),
           ),
-          const CocktailIngredient(ingredient: lime, quantity: 6.0),
-          const CocktailIngredient(ingredient: cane, quantity: 1.0),
-          const CocktailIngredient(
-              ingredient: greenLime, quantity: 4, unit: Unit.wedges),
+          CocktailIngredient(
+              ingredient: lime, quantity: Quantity(6.0, Unit.cl)),
+          CocktailIngredient(
+              ingredient: cane, quantity: Quantity(1.0, Unit.cl)),
+          CocktailIngredient(
+              ingredient: greenLime, quantity: Quantity(4, Unit.wedge)),
         ],
         glassType: const GlassType(name: "Whisky"),
         description:

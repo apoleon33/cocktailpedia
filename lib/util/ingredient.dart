@@ -59,9 +59,4 @@ class CocktailIngredient {
   });
 
   String get formatQuantity => quantity.formatQuantity;
-
-  @override
-  String toString() {
-    return 'CocktailIngredient{isBase: $isBase, ingredient: $ingredient, quantity: $quantity}';
-  }
 }

@@ -12,16 +12,17 @@ class Quantity {
 
   double get value => _value * (unit.conversionRate ?? 1);
 
-  String get formatQuantity => (value != 0.0) ? "$value $unit" : "";
+  String get formatQuantity =>
+      (value != 0.0) ? "${value.toStringAsFixed(2)} $unit" : "";
 }
 
 enum Unit {
   ml(1),
-  cl(10),
+  cl(1 / 10),
   wedge(null, isPluralDifferent: true),
   unit(null, isPluralDifferent: true),
-  oz(29.5735), // roughly
-  shot(400, isPluralDifferent: true);
+  oz(1 / 29.5735), // roughly
+  shot(1 / 40, isPluralDifferent: true);
 
   /// Quotient to get the unit converted in mL
   /// default to [null] if no conversion is possible

@@ -1,4 +1,6 @@
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/util/ingredient.dart';
+import 'package:cocktailpedia/util/unit.dart';
 import 'package:cocktailpedia/widgets/cocktail_page/ingredient_formatter.dart';
 import 'package:cocktailpedia/widgets/custom_theme.dart';
 import 'package:flutter/material.dart';
@@ -105,6 +107,8 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
   /// Uniform padding for every of [SliverList.list]'s children.
   final EdgeInsets _margin = const EdgeInsets.only(right: 16.0, left: 16.0);
 
+  Unit currentUnit = Unit.cl;
+
   @override
   void initState() {
     super.initState();
@@ -136,6 +140,12 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _changeUnit(Unit newUnit) {
+    for (CocktailIngredient element in widget.cocktail.ingredients) {
+      element.quantity.convert(newUnit);
+    }
   }
 
   @override
@@ -276,11 +286,43 @@ class _CustomBottomSheetState extends State<CustomBottomSheet> {
                     child: Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               "Ingredients",
                               style: textTheme.titleLarge,
                             ),
+                            MenuAnchor(
+                                menuChildren: Unit.values
+                                    .where((element) =>
+                                        element.conversionRate != null)
+                                    .map((e) => MenuItemButton(
+                                          onPressed: () {
+                                            currentUnit = e;
+                                            _changeUnit(e);
+                                            setState(() {});
+                                          },
+                                          child: Text(e.toString()),
+                                        ))
+                                    .toList(),
+                                builder: (
+                                  _,
+                                  controller,
+                                  child,
+                                ) {
+                                  return TextButton(
+                                    onPressed: () {
+                                      if (controller.isOpen) {
+                                        controller.close();
+                                      } else {
+                                        controller.open();
+                                      }
+                                    },
+                                    child: Text(
+                                      currentUnit.toString(),
+                                    ),
+                                  );
+                                }),
                           ],
                         ),
                         Padding(

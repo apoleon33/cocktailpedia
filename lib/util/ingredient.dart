@@ -1,3 +1,4 @@
+import 'package:cocktailpedia/util/unit.dart';
 import 'package:flutter/material.dart';
 
 class GenericIngredient {
@@ -8,8 +9,7 @@ class GenericIngredient {
 
   final ImageProvider? imageProvider;
 
-  const GenericIngredient(
-    this.name, {
+  const GenericIngredient(this.name, {
     this.alcoholLevel = 0.0,
     this.imageProvider,
   });
@@ -34,8 +34,7 @@ class BrandedIngredient extends GenericIngredient {
 
   final double price;
 
-  const BrandedIngredient(
-    super.name, {
+  const BrandedIngredient(super.name, {
     required this.brand,
     this.price = 0.0,
     super.alcoholLevel,
@@ -51,20 +50,18 @@ class CocktailIngredient {
   final bool isBase;
   final GenericIngredient ingredient;
 
-  final double quantity;
-  final Unit unit;
+  final Quantity quantity;
 
   const CocktailIngredient({
     required this.ingredient,
-    this.quantity = 0.0,
-    this.unit = Unit.cl,
+    required this.quantity,
     this.isBase = false,
   });
 
-  String get formatQuantity => ;
+  String get formatQuantity => quantity.formatQuantity;
 
   @override
   String toString() {
-    return 'CocktailIngredient{isBase: $isBase, ingredient: $ingredient, unit: $unit}';
+    return 'CocktailIngredient{isBase: $isBase, ingredient: $ingredient, quantity: $quantity}';
   }
 }

@@ -22,7 +22,7 @@ class Quantity {
 enum Unit {
   ml(1),
   cl(1 / 10),
-  wedge(null),
+  wedge(null, formatQuantity: FormatPlural()),
   unit(null, formatQuantity: FormatUnit()),
   oz(1 / 29.5735), // roughly
   shot(1 / 40);
@@ -72,4 +72,13 @@ class DefaultFormat extends FormatQuantity {
   @override
   String formatQuantity(Quantity quantity) =>
       "${quantity.formattedValue} ${quantity.unit}";
+}
+
+/// Some units needs an "s" added when the quantity is bigger than 1.
+class FormatPlural extends DefaultFormat {
+  const FormatPlural();
+
+  @override
+  String formatQuantity(Quantity quantity) =>
+      "${super.formatQuantity(quantity)}${quantity.value > 1 ? "s" : ""}";
 }

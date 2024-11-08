@@ -1,4 +1,5 @@
 import 'package:cocktailpedia/routes/home.dart';
+import 'package:cocktailpedia/routes/upload/upload_name_images.dart';
 import 'package:flutter/material.dart';
 
 class Router extends StatefulWidget {
@@ -13,16 +14,19 @@ class _RouterState extends State<Router> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(),
       body: Routes.values.map((e) => e.destination).toList()[currentPageIndex],
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+          if (index != 1) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          } else {
+            Navigator.of(context).push(UploadPage.createRoute());
+          }
         },
         selectedIndex: currentPageIndex,
         destinations:
@@ -35,7 +39,7 @@ class _RouterState extends State<Router> {
 enum Routes {
   home(Home(), NavigationDestination(icon: Icon(Icons.home), label: "Home")),
   add(
-    SizedBox.shrink(),
+    UploadPage(),
     NavigationDestination(
       icon: Icon(Icons.add),
       label: "",

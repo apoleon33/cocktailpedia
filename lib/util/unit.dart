@@ -25,7 +25,7 @@ enum Unit {
   wedge(null, formatQuantity: FormatPlural()),
   unit(null, formatQuantity: FormatUnit()),
   oz(1 / 29.5735), // roughly
-  shot(1 / 40);
+  shot(1 / 40, formatQuantity: FormatPlural());
 
   /// Quotient to get the unit converted in mL
   /// default to [null] if no conversion is possible

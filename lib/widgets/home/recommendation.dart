@@ -8,7 +8,7 @@ import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
 
 // Wether you should use the intern database, or data from the api
-const bool USE_DATA_FROM_DB = false;
+const bool useDataFromApi = true;
 
 class Recommendation extends StatefulWidget {
   const Recommendation({super.key});
@@ -76,7 +76,7 @@ class SingleRecommendationState extends State<SingleRecommendation>
   }
 
   void _getCocktailFromApi() async {
-    cocktail = (USE_DATA_FROM_DB)
+    cocktail = (useDataFromApi)
         ? Cocktail.getFromApi(
             await Api.getFromApi(
               Cocktail.apiEndpoint,

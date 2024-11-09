@@ -69,8 +69,11 @@ class _UploadPageState extends State<UploadPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child:
-                FilledButton.tonal(onPressed: () {}, child: const Text("next")),
+            child: FilledButton.tonal(
+                onPressed: () {
+                  // redirect to the next page
+                },
+                child: const Text("next")),
           )
         ],
       ),
@@ -123,14 +126,20 @@ class _UploadPageState extends State<UploadPage> {
   }
 }
 
-class SmallImageCarousel extends StatelessWidget {
-  final List<Image> images;
+class SmallImageCarousel extends StatefulWidget {
+  // should be immutable but we doing some comeback shenanigans
+  List<Image> images;
 
+  SmallImageCarousel(this.images, {super.key});
+
+  @override
+  State<StatefulWidget> createState() => _SmallImageCarouselState();
+}
+
+class _SmallImageCarouselState extends State<SmallImageCarousel> {
   final BorderRadius borderRadius = BorderRadius.circular(16);
   final double imageHeight = 200;
   final double screenRatio = 0.5625; //9:16
-
-  SmallImageCarousel(this.images, {super.key});
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -138,7 +147,7 @@ class SmallImageCarousel extends StatelessWidget {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: [
-            ...images.map(
+            ...widget.images.map(
               (e) => Padding(
                 padding: const EdgeInsets.only(right: 8, left: 8),
                 child: ClipRRect(
@@ -157,15 +166,38 @@ class SmallImageCarousel extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 8, left: 8),
-              child: Container(
-                width: imageHeight * screenRatio,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                  borderRadius: borderRadius,
-                ),
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon(Icons.add), Text("Add")],
+              child: InkWell(
+                onTap: () async {
+                  FilePickerResult? result = await FilePicker.platform
+                      .pickFiles(type: FileType.image, allowMultiple: true);
+
+                  if (result != null) {
+                    List<File> files =
+                        result.paths.map((path) => File(path!)).toList();
+
+                    setState(() {
+                      // Probably an easier way to do
+                      widget.images.addAll(files
+                          .map((File file) =>
+                              base64Encode(file.readAsBytesSync()))
+                          .map((e) => e.decodeBase64Image())
+                          .toList());
+                    });
+                  } else {
+                    // User canceled the picker
+                  }
+                },
+                borderRadius: borderRadius,
+                child: Container(
+                  width: imageHeight * screenRatio,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    borderRadius: borderRadius,
+                  ),
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [Icon(Icons.add), Text("Add")],
+                  ),
                 ),
               ),
             )

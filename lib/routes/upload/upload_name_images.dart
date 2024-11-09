@@ -78,6 +78,13 @@ class _UploadPageState extends State<UploadPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Cocktail name',
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(16)),
             ((images != null)
                 ? SmallImageCarousel(
                     images!.map((e) => e.decodeBase64Image()).toList())
@@ -108,13 +115,6 @@ class _UploadPageState extends State<UploadPage> {
                       ],
                     ),
                   )),
-            const Padding(padding: EdgeInsets.all(16)),
-            const TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Cocktail name',
-              ),
-            ),
           ],
         ),
       ),

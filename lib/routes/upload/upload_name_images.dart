@@ -13,6 +13,7 @@ class UploadPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _UploadPageState();
 
+  /// Smooth transition from bottom to top when clicking on the "Add" button.
   static Route createRoute() => PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
             const UploadPage(),

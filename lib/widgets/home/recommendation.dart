@@ -8,7 +8,7 @@ import '../../database/api.dart';
 import '../../routes/cocktail_page.dart';
 
 // Wether you should use the intern database, or data from the api
-const bool useDataFromApi = true;
+const bool useDataFromApi = false;
 
 class Recommendation extends StatefulWidget {
   const Recommendation({super.key});
@@ -40,12 +40,17 @@ class _RecommendationState extends State<Recommendation> {
           SizedBox(
             height: 250,
             child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: const [
-                SingleRecommendation(cocktailId: 0),
-                SingleRecommendation(cocktailId: 1)
-              ],
-            ),
+                scrollDirection: Axis.horizontal,
+                children: (useDataFromApi)
+                    ? const [
+                        SingleRecommendation(cocktailId: 0),
+                        SingleRecommendation(cocktailId: 1)
+                      ]
+                    : CocktailDatabase.values
+                        .asMap()
+                        .entries
+                        .map((e) => SingleRecommendation(cocktailId: e.key))
+                        .toList()),
           )
         ],
       ),
@@ -104,7 +109,9 @@ class SingleRecommendationState extends State<SingleRecommendation>
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => CocktailPage(cocktail: cocktail)),
+            MaterialPageRoute(
+              builder: (context) => CocktailPage(cocktail: cocktail),
+            ),
           );
         },
         borderRadius: BorderRadius.circular(12.0),

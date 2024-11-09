@@ -127,7 +127,7 @@ class _UploadPageState extends State<UploadPage> {
 }
 
 class SmallImageCarousel extends StatefulWidget {
-  // should be immutable but we doing some comeback shenanigans
+  // should be immutable but we doing some callback shenanigans
   List<Image> images;
 
   SmallImageCarousel(this.images, {super.key});

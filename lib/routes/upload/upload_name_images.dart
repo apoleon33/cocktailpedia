@@ -127,10 +127,9 @@ class _UploadPageState extends State<UploadPage> {
 }
 
 class SmallImageCarousel extends StatefulWidget {
-  // should be immutable but we doing some callback shenanigans
-  List<Image> images;
+  final List<Image> images;
 
-  SmallImageCarousel(this.images, {super.key});
+  const SmallImageCarousel(this.images, {super.key});
 
   @override
   State<StatefulWidget> createState() => _SmallImageCarouselState();

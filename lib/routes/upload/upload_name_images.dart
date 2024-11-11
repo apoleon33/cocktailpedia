@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,11 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
+  final Padding divider = const Padding(padding: EdgeInsets.all(16));
+
+  String cocktailName = "";
   List<String>? images;
+  String authorName = "";
 
   void _getImages() async {
     FilePickerResult? result = await FilePicker.platform
@@ -55,6 +60,20 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
+  void _changePage() {
+    final Cocktail cocktail = Cocktail(
+      name: cocktailName,
+      ingredients: [],
+      image: images!.map((e) => e.decodeBase64Image()).toList(),
+      author: authorName,
+    );
+    print(cocktail);
+
+    // redirect to next page and send the cocktail
+  }
+
+  bool get _formIsCompleted => authorName != "" && cocktailName != "" && images != null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,10 +89,9 @@ class _UploadPageState extends State<UploadPage> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: FilledButton.tonal(
-                onPressed: () {
-                  // redirect to the next page
-                },
-                child: const Text("next")),
+              onPressed: (_formIsCompleted)? _changePage: null,
+              child: const Text("next"),
+            ),
           )
         ],
       ),
@@ -82,13 +100,18 @@ class _UploadPageState extends State<UploadPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              onChanged: (String value) {
+                setState(() {
+                  cocktailName = value;
+                });
+              },
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Cocktail name',
               ),
             ),
-            const Padding(padding: EdgeInsets.all(16)),
+            divider,
             ((images != null)
                 ? SmallImageCarousel(
                     images!.map((e) => e.decodeBase64Image()).toList())
@@ -119,6 +142,18 @@ class _UploadPageState extends State<UploadPage> {
                       ],
                     ),
                   )),
+            divider,
+            TextField(
+              onChanged: (String value) {
+                setState(() {
+                  authorName = value;
+                });
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Author',
+              ),
+            ),
           ],
         ),
       ),

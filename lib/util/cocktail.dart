@@ -75,6 +75,6 @@ class Cocktail {
 
   @override
   String toString() {
-    return 'Cocktail{name: $name, author: $author, ingredients: $ingredients, glassType: $glassType}';
+    return 'Cocktail{name: $name, author: $author, description: $description, recipe: $recipe, image: $image, ingredients: $ingredients, glassType: $glassType, shakerNeeded: $shakerNeeded}';
   }
 }

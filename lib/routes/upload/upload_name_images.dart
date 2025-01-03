@@ -67,7 +67,7 @@ class _UploadPageState extends State<UploadPage> {
       image: images!.map((e) => e.decodeBase64Image()).toList(),
       author: authorName,
     );
-    print(cocktail);
+    // print("There is ${cocktail.image.length} images");
 
     // redirect to next page and send the cocktail
   }
@@ -79,6 +79,12 @@ class _UploadPageState extends State<UploadPage> {
     setState(() {
       // use of "!" but it should be safe because of the condition
       images!.remove(images![index]);
+    });
+  }
+
+  void _addImage(List<String> newImages) async {
+    setState(() {
+      images!.addAll(newImages);
     });
   }
 
@@ -125,6 +131,9 @@ class _UploadPageState extends State<UploadPage> {
                     images!.map((e) => e.decodeBase64Image()).toList(),
                     onRemoveButtonPressed: (int index) async {
                       _removeImage(index);
+                    },
+                    onAddButtonPressed: (List<String> newImages) async {
+                      _addImage(newImages);
                     },
                   )
                 : Container(
@@ -176,11 +185,13 @@ class _UploadPageState extends State<UploadPage> {
 class SmallImageCarousel extends StatefulWidget {
   final List<Image> images;
   final void Function(int index) onRemoveButtonPressed;
+  final void Function(List<String>) onAddButtonPressed;
 
   const SmallImageCarousel(
     this.images, {
     super.key,
     required this.onRemoveButtonPressed,
+    required this.onAddButtonPressed,
   });
 
   @override
@@ -255,6 +266,12 @@ class _SmallImageCarouselState extends State<SmallImageCarousel> {
                         result.paths.map((path) => File(path!)).toList();
 
                     setState(() {
+                      widget.onAddButtonPressed(
+                        files
+                            .map((File file) =>
+                                base64Encode(file.readAsBytesSync()))
+                            .toList(),
+                      );
                       // Probably an easier way to do
                       widget.images.addAll(files
                           .map((File file) =>

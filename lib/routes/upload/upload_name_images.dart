@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:cocktailpedia/util/base_64_image.dart';
 
+/// This is the first page, where the user will be able to tell his name (google account soon?), the name of the cocktail, and pics of the cocktail
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
 

@@ -72,7 +72,15 @@ class _UploadPageState extends State<UploadPage> {
     // redirect to next page and send the cocktail
   }
 
-  bool get _formIsCompleted => authorName != "" && cocktailName != "" && images != null;
+  bool get _formIsCompleted =>
+      authorName != "" && cocktailName != "" && images != null;
+
+  void _removeImage(int index) async {
+    setState(() {
+      // use of "!" but it should be safe because of the condition
+      images!.remove(images![index]);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +97,7 @@ class _UploadPageState extends State<UploadPage> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: FilledButton.tonal(
-              onPressed: (_formIsCompleted)? _changePage: null,
+              onPressed: (_formIsCompleted) ? _changePage : null,
               child: const Text("next"),
             ),
           )
@@ -114,7 +122,11 @@ class _UploadPageState extends State<UploadPage> {
             divider,
             ((images != null)
                 ? SmallImageCarousel(
-                    images!.map((e) => e.decodeBase64Image()).toList())
+                    images!.map((e) => e.decodeBase64Image()).toList(),
+                    onRemoveButtonPressed: (int index) async {
+                      _removeImage(index);
+                    },
+                  )
                 : Container(
                     height: 150,
                     decoration: BoxDecoration(
@@ -163,8 +175,13 @@ class _UploadPageState extends State<UploadPage> {
 
 class SmallImageCarousel extends StatefulWidget {
   final List<Image> images;
+  final void Function(int index) onRemoveButtonPressed;
 
-  const SmallImageCarousel(this.images, {super.key});
+  const SmallImageCarousel(
+    this.images, {
+    super.key,
+    required this.onRemoveButtonPressed,
+  });
 
   @override
   State<StatefulWidget> createState() => _SmallImageCarouselState();
@@ -186,14 +203,42 @@ class _SmallImageCarouselState extends State<SmallImageCarousel> {
                 padding: const EdgeInsets.only(right: 8, left: 8),
                 child: ClipRRect(
                   borderRadius: borderRadius,
-                  child: Container(
-                    width: imageHeight * screenRatio,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: e.image,
-                        fit: BoxFit.cover,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: imageHeight * screenRatio,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: e.image,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        width: imageHeight * screenRatio,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const SizedBox.shrink(),
+                            Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: SizedBox(
+                                width: 32.0,
+                                height: 32.0,
+                                child: IconButton.filledTonal(
+                                  iconSize: 16.0,
+                                  onPressed: () {
+                                    widget.onRemoveButtonPressed(
+                                        widget.images.indexOf(e));
+                                  },
+                                  icon: const Icon(Icons.remove),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

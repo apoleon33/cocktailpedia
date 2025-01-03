@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class CustomTheme extends StatefulWidget {
   final ImageProvider image;
@@ -13,17 +14,17 @@ class CustomTheme extends StatefulWidget {
 class _CustomTheme extends State<CustomTheme> {
   ColorScheme colorScheme = ColorScheme.fromSeed(
     seedColor: Colors.deepOrange,
-    brightness: Brightness.light,
+    brightness: SchedulerBinding.instance.platformDispatcher.platformBrightness,
   );
 
-  final Brightness _brightness = Brightness.light;
+  final Brightness _brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      // Future to avoid lage between the Hero transition and the theme switch
+      // Future to avoid lag between the Hero transition and the theme switch
       Future.delayed(const Duration(seconds: 1), _initTheme);
     });
   }

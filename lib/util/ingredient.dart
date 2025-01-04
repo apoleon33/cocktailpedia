@@ -1,4 +1,5 @@
-import 'package:cocktailpedia/util/unit.dart';
+import 'package:cocktailpedia/util/unit/quantity.dart';
+import 'package:cocktailpedia/util/unit/unit.dart';
 import 'package:flutter/material.dart';
 
 class GenericIngredient {

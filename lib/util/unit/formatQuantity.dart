@@ -1,46 +1,4 @@
-class Quantity {
-  /// The brut quantity, in mL if applicable.
-  final double _value;
-
-  Unit unit;
-
-  Quantity(this._value, this.unit);
-
-  void convert(Unit newUnit) {
-    unit = (unit.conversionRate != null) ? newUnit : unit;
-  }
-
-  double get value => _value * (unit.conversionRate ?? 1);
-
-  String get formattedValue => value.toStringAsFixed(2);
-
-  String get formatQuantity => (value != 0.0)
-      ? unit.formatQuantity.formatQuantity(this)
-      : FormatQuantity.formatEmptyQuantity();
-}
-
-enum Unit {
-  ml(1),
-  cl(1 / 10),
-  wedge(null, formatQuantity: FormatPlural()),
-  unit(null, formatQuantity: FormatUnit()),
-  oz(1 / 29.5735), // roughly
-  shot(1 / 40, formatQuantity: FormatPlural());
-
-  /// Quotient to get the unit converted in mL
-  /// default to [null] if no conversion is possible
-  final double? conversionRate;
-
-  final FormatQuantity formatQuantity;
-
-  const Unit(
-    this.conversionRate, {
-    this.formatQuantity = const DefaultFormat(),
-  });
-
-  @override
-  String toString() => name;
-}
+import 'package:cocktailpedia/util/unit/quantity.dart';
 
 /// How a quantity should be displayed
 abstract class FormatQuantity {
@@ -81,4 +39,14 @@ class FormatPlural extends DefaultFormat {
   @override
   String formatQuantity(Quantity quantity) =>
       "${super.formatQuantity(quantity)}${quantity.value > 1 ? "s" : ""}";
+}
+
+class DisplayAsFraction extends FormatQuantity {
+  const DisplayAsFraction();
+  @override
+  String formatQuantity(Quantity quantity){
+    // "⁄"
+    return "${(quantity.value).toStringAsFixed(2)} shot${quantity.value > 1 ? "s" : ""}";
+  }
+
 }

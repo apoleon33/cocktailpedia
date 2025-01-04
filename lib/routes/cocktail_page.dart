@@ -1,5 +1,5 @@
 import 'package:cocktailpedia/util/cocktail.dart';
-import 'package:cocktailpedia/util/ingredient.dart';
+import 'package:cocktailpedia/util/ingredient/cocktail_ingredient.dart';
 import 'package:cocktailpedia/util/unit/unit.dart';
 import 'package:cocktailpedia/widgets/cocktail_page/ingredient_formatter.dart';
 import 'package:cocktailpedia/widgets/custom_theme.dart';

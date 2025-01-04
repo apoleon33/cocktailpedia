@@ -1,10 +1,11 @@
 import 'package:cocktailpedia/util/base_64_image.dart';
-import 'package:cocktailpedia/util/ingredient.dart';
+import 'package:cocktailpedia/util/ingredient/cocktail_ingredient.dart';
 import 'package:cocktailpedia/util/unit/unit.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../util/cocktail.dart';
 import '../../util/glass_type.dart';
+import '../util/ingredient/branded_ingredient.dart';
 import '../util/unit/quantity.dart';
 
 const GenericIngredient lime = GenericIngredient("Squeezed lime juice ");

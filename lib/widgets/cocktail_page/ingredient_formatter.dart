@@ -1,4 +1,4 @@
-import 'package:cocktailpedia/util/ingredient.dart';
+import 'package:cocktailpedia/util/ingredient/cocktail_ingredient.dart';
 import 'package:flutter/material.dart';
 
 class IngredientFormatter extends StatelessWidget {

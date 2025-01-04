@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import '../../util/cocktail.dart';
 import '../../util/glass_type.dart';
 import '../util/ingredient/branded_ingredient.dart';
+import '../util/ingredient/generic_ingredient.dart';
 import '../util/unit/quantity.dart';
 
 const GenericIngredient lime = GenericIngredient("Squeezed lime juice ");

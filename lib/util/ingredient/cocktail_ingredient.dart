@@ -1,5 +1,4 @@
 import 'package:cocktailpedia/util/unit/quantity.dart';
-import 'package:flutter/material.dart';
 
 import 'generic_ingredient.dart';
 

@@ -1,6 +1,6 @@
 import 'package:cocktailpedia/util/unit/unit.dart';
 
-import 'formatQuantity.dart';
+import 'format_quantity.dart';
 
 class Quantity {
   /// The brut quantity, in mL if applicable.

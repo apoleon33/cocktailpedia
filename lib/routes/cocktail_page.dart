@@ -66,7 +66,7 @@ class _CocktailPageState extends State<CocktailPage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 32.0, left: 8.0, right: 8.0),
+              padding: const EdgeInsets.only(top: 56.0, left: 8.0, right: 8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

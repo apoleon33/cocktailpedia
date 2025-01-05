@@ -41,6 +41,7 @@ class _UploadPageState extends State<UploadPage> {
   String cocktailName = "";
   List<String>? images;
   String authorName = "";
+  String description = "";
 
   void _getImages() async {
     FilePickerResult? result = await FilePicker.platform
@@ -67,8 +68,9 @@ class _UploadPageState extends State<UploadPage> {
       ingredients: [],
       image: images!.map((e) => e.decodeBase64Image()).toList(),
       author: authorName,
+      description: description,
     );
-    // print("There is ${cocktail.image.length} images");
+    print("description: ${cocktail.description}");
 
     // redirect to next page and send the cocktail
   }
@@ -175,6 +177,21 @@ class _UploadPageState extends State<UploadPage> {
                 border: OutlineInputBorder(),
                 labelText: 'Author',
               ),
+            ),
+            divider,
+            TextField(
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
+              minLines: 2,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Description',
+              ),
+              onChanged: (String text) {
+                setState(() {
+                  description = text;
+                });
+              },
             ),
           ],
         ),

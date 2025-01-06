@@ -3,9 +3,10 @@ import 'package:flutter/scheduler.dart';
 
 class CustomTheme extends StatefulWidget {
   final ImageProvider image;
-  final Widget child;
 
-  const CustomTheme({super.key, required this.image, required this.child});
+  final Widget Function(ThemeData theme) builder;
+
+  const CustomTheme({super.key, required this.image, required this.builder});
 
   @override
   State<StatefulWidget> createState() => _CustomTheme();
@@ -17,7 +18,8 @@ class _CustomTheme extends State<CustomTheme> {
     brightness: SchedulerBinding.instance.platformDispatcher.platformBrightness,
   );
 
-  final Brightness _brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+  final Brightness _brightness =
+      SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
   @override
   void initState() {
@@ -39,13 +41,14 @@ class _CustomTheme extends State<CustomTheme> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData(
+      colorScheme: colorScheme,
+      useMaterial3: true,
+      brightness: _brightness,
+    );
     return Theme(
-      data: ThemeData(
-        colorScheme: colorScheme,
-        useMaterial3: true,
-        brightness: _brightness,
-      ),
-      child: widget.child,
+      data: theme,
+      child: widget.builder(theme),
     );
   }
 }

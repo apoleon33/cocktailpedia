@@ -38,7 +38,7 @@ class _CocktailPageState extends State<CocktailPage> {
     return Scaffold(
       body: CustomTheme(
         image: widget.cocktail.image[0].image,
-        child: Stack(
+        builder: (ThemeData theme) => Stack(
           children: [
             Column(
               children: [

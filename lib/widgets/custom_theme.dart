@@ -3,10 +3,11 @@ import 'package:flutter/scheduler.dart';
 
 class CustomTheme extends StatefulWidget {
   final ImageProvider image;
+  final Duration delay;
 
   final Widget Function(ThemeData theme) builder;
 
-  const CustomTheme({super.key, required this.image, required this.builder});
+  const CustomTheme({super.key, required this.image, required this.builder, this.delay = const Duration(seconds: 1)});
 
   @override
   State<StatefulWidget> createState() => _CustomTheme();
@@ -27,7 +28,7 @@ class _CustomTheme extends State<CustomTheme> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // Future to avoid lag between the Hero transition and the theme switch
-      Future.delayed(const Duration(seconds: 1), _initTheme);
+      Future.delayed(widget.delay, _initTheme);
     });
   }
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cocktailpedia/routes/upload/upload_cocktail_properties.dart';
 import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -70,9 +71,12 @@ class _UploadPageState extends State<UploadPage> {
       author: authorName,
       description: description,
     );
-    print("description: ${cocktail.description}");
 
-    // redirect to next page and send the cocktail
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => UploadCocktailProperties(
+        cocktail: cocktail,
+      ),
+    ));
   }
 
   bool get _formIsCompleted =>
@@ -234,15 +238,17 @@ class _SmallImageCarouselState extends State<SmallImageCarousel> {
                   borderRadius: borderRadius,
                   child: Stack(
                     children: [
-                      Container(
-                        width: imageHeight * screenRatio,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: e.image,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+                      Hero(
+                          tag: "image-${widget.images.indexOf(e)}",
+                          child: Container(
+                            width: imageHeight * screenRatio,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: e.image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          )),
                       SizedBox(
                         width: imageHeight * screenRatio,
                         child: Row(

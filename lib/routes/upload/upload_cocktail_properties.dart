@@ -52,25 +52,15 @@ class _UploadCocktailPropertiesStates extends State<UploadCocktailProperties> {
               ),
             ),
             divider,
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 32.0),
-                  child: Icon(
-                    Icons.construction,
-                    color: theme.colorScheme.primary,
-                  ),
+            SubsectionWrapper(
+              theme: theme,
+              headerWrapper: HeaderWrapper(
+                text: "Tools",
+                icon: Icon(
+                  Icons.construction,
+                  color: theme.colorScheme.primary,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "Tools",
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                ),
-              ],
-            ),
-            Column(
+              ),
               children: [
                 CheckboxListTile(
                   value: isShakerNeeded,
@@ -97,13 +87,84 @@ class _UploadCocktailPropertiesStates extends State<UploadCocktailProperties> {
                       isCocktailStrainerNeeded = !isCocktailStrainerNeeded;
                     });
                   },
-                  title: const Text("This cocktail requires a cocktail strainer"),
+                  title:
+                      const Text("This cocktail requires a cocktail strainer"),
                 ),
               ],
+            ),
+            divider,
+            SubsectionWrapper(
+              headerWrapper: HeaderWrapper(
+                text: "Ingredients",
+                icon: Icon(
+                  Icons.liquor,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              theme: theme,
             )
           ],
         ),
       ),
     );
   }
+}
+
+class SubsectionWrapper extends StatelessWidget {
+  final HeaderWrapper headerWrapper;
+  final List<Widget> children;
+  final ThemeData theme;
+
+  const SubsectionWrapper({
+    super.key,
+    required this.headerWrapper,
+    required this.theme,
+    this.children = const [],
+  });
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(right: 32.0, left: 32.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24.0),
+            color: theme.colorScheme.secondaryContainer,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 14.0, bottom: 14.0),
+            child: Column(
+              children: [
+                headerWrapper,
+                Column(
+                  children: children,
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+}
+
+class HeaderWrapper extends StatelessWidget {
+  final Icon icon;
+  final String text;
+
+  const HeaderWrapper({super.key, required this.text, required this.icon});
+
+  @override
+  Widget build(BuildContext context) => Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 12.0),
+            child: icon,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+          ),
+        ],
+      );
 }

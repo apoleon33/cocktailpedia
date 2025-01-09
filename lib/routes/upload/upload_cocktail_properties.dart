@@ -62,34 +62,68 @@ class _UploadCocktailPropertiesStates extends State<UploadCocktailProperties> {
                 ),
               ),
               children: [
-                CheckboxListTile(
-                  value: isShakerNeeded,
-                  onChanged: (bool? status) {
-                    setState(() {
-                      isShakerNeeded = !isShakerNeeded;
-                    });
-                  },
-                  title: const Text("This cocktail requires a shaker"),
+                Material(
+                  color: Colors.transparent,
+                  child: CheckboxListTile(
+                    value: isShakerNeeded,
+                    onChanged: (bool? status) {
+                      setState(() {
+                        isShakerNeeded = !isShakerNeeded;
+                      });
+                    },
+                    title: const Text("This cocktail requires a shaker"),
+                  ),
                 ),
-                CheckboxListTile(
-                  value: isCocktailSpoonNeeded,
-                  onChanged: (bool? status) {
-                    setState(() {
-                      isCocktailSpoonNeeded = !isCocktailSpoonNeeded;
-                    });
-                  },
-                  title: const Text("This cocktail requires a cocktail spoon"),
+                Material(
+                  color: Colors.transparent,
+                  child: CheckboxListTile(
+                    value: isCocktailSpoonNeeded,
+                    onChanged: (bool? status) {
+                      setState(() {
+                        isCocktailSpoonNeeded = !isCocktailSpoonNeeded;
+                      });
+                    },
+                    title: const Text(
+                      "This cocktail requires a cocktail spoon",
+                    ),
+                  ),
                 ),
-                CheckboxListTile(
-                  value: isCocktailStrainerNeeded,
-                  onChanged: (bool? status) {
-                    setState(() {
-                      isCocktailStrainerNeeded = !isCocktailStrainerNeeded;
-                    });
-                  },
-                  title:
-                      const Text("This cocktail requires a cocktail strainer"),
+                Material(
+                  color: Colors.transparent,
+                  child: CheckboxListTile(
+                    value: isCocktailStrainerNeeded,
+                    onChanged: (bool? status) {
+                      setState(() {
+                        isCocktailStrainerNeeded = !isCocktailStrainerNeeded;
+                      });
+                    },
+                    title: const Text(
+                      "This cocktail requires a cocktail strainer",
+                    ),
+                  ),
                 ),
+                Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: 14.0,
+                        left: 14.0,
+                        top: 8.0,
+                        bottom: 8.0,
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Glass type",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
             divider,
@@ -102,7 +136,10 @@ class _UploadCocktailPropertiesStates extends State<UploadCocktailProperties> {
                 ),
               ),
               theme: theme,
-            )
+              children: const <Widget>[
+                Text("SOON :)"),
+              ],
+            ),
           ],
         ),
       ),

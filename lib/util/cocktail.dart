@@ -57,6 +57,28 @@ class Cocktail {
         shakerNeeded: apiContent.asMap["mixing"] == "YES",
       );
 
+  /// Creates a copy of this Cocktail but with the given fields replaced with the new values.
+  Cocktail copyWith(
+    String? name,
+    List<CocktailIngredient>? ingredients,
+    String? recipe,
+    List<Image>? image,
+    String? author,
+    GlassType? glassType,
+    bool? shakerNeeded,
+    String? description,
+  ) =>
+      Cocktail(
+        name: name ?? this.name,
+        ingredients: ingredients ?? this.ingredients,
+        recipe: recipe ?? this.recipe,
+        image: image ?? this.image,
+        author: author ?? this.author,
+        glassType: glassType ?? this.glassType,
+        shakerNeeded: shakerNeeded ?? this.shakerNeeded,
+        description: description ?? this.description,
+      );
+
   /// All the alcoholic ingredients in the cocktail.
   List<GenericIngredient> get alcohols => ingredients
       .where((element) => element.ingredient.isAlcoholic)

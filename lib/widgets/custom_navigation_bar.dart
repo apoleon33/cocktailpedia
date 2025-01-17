@@ -5,8 +5,13 @@ class CustomNavigationBar extends StatelessWidget
     implements PreferredSizeWidget {
   final bool isColorSurface;
 
+  // AppBar properties
+  final Widget? leading;
+  final Widget? title;
+  final List<Widget>? actions;
+
   /// Small class to create an appbar with one of two colors for the system navigation bar on android
-  const CustomNavigationBar({super.key, required this.isColorSurface});
+  const CustomNavigationBar({super.key, required this.isColorSurface, this.leading, this.title, this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +30,9 @@ class CustomNavigationBar extends StatelessWidget
                 3.0,
               ),
       ),
+      leading: leading,
+      title: title,
+      actions: actions,
     );
   }
 

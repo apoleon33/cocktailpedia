@@ -1,5 +1,6 @@
 import 'package:cocktailpedia/routes/home.dart';
 import 'package:cocktailpedia/routes/upload/upload_name_images.dart';
+import 'package:cocktailpedia/widgets/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 class Router extends StatefulWidget {
@@ -15,7 +16,7 @@ class _RouterState extends State<Router> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const CustomNavigationBar(isColorSurface: false),
       body: Routes.values.map((e) => e.destination).toList()[currentPageIndex],
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,

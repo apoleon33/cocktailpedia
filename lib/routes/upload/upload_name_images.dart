@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cocktailpedia/routes/upload/upload_cocktail_properties.dart';
 import 'package:cocktailpedia/util/cocktail.dart';
+import 'package:cocktailpedia/widgets/custom_navigation_bar.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -98,7 +99,8 @@ class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: CustomNavigationBar(
+        isColorSurface: true,
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {

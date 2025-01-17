@@ -1,5 +1,6 @@
 import 'package:cocktailpedia/util/cocktail.dart';
 import 'package:cocktailpedia/util/glass_type.dart';
+import 'package:cocktailpedia/widgets/custom_navigation_bar.dart';
 import 'package:cocktailpedia/widgets/custom_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -81,8 +82,9 @@ class _UploadCocktailPropertiesStates extends State<UploadCocktailProperties> {
       image: _imageReference,
       delay: const Duration(milliseconds: 250),
       builder: (ThemeData theme) => Scaffold(
-        appBar: AppBar(
+        appBar: CustomNavigationBar(
           title: Text(widget.cocktail.name),
+          isColorSurface: true,
         ),
         body: ListView(
           children: [
